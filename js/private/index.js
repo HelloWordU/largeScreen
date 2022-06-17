@@ -1,42 +1,18 @@
-window.onload = function() {
+window.onload = function () {
 	var vm = new Vue({
 		el: '#index',
 		data: {
 			projectUrl: "/project/get",
 			categoryUrl: "/category/get",
-			list: [{
-					"title": "华为P50",
-					"linkUrl": "second.html"
-				},{
-					"title": "华为P501",
-					"linkUrl": "dataShow.html"
-				},{
-					"title": "华为P50",
-					"linkUrl": "second.html"
-				},{
-					"title": "P501",
-					"linkUrl": "index.html"
-				},{
-					"title": "华为P50",
-					"linkUrl": "second.html"
-				},{
-					"title": "华为P50",
-					"linkUrl": "second.html"
-				},{
-					"title": "华为P50",
-					"linkUrl": "second.html"
-				},{
-					"title": "华为P50",
-					"linkUrl": "second.html"
-				},]
+			list: []
 		},
 
-		created: function() {
+		created: function () {
 
 		},
-		mounted: function() {
+		mounted: function () {
 			this.FnProject()
-			this.FnCategory()
+			//this.FnCategory()
 		},
 		methods: {
 			/* 修改密码 */
@@ -50,34 +26,43 @@ window.onload = function() {
 			/* 退出 */
 			FnLogOut() {
 				var logOutUrl = domainUrl + this.logOutUrl
-				// getMessage(logOutUrl).then(function(){
-				// 	if(res.code == 0){
-				// 	  location.href = "./login.html"
-				// 	}else{
-				// 		alert(res.message)
-				// 	}
-				// })
+				getMessage(logOutUrl).then(function(res){
+					if(res.code == 200){
+					  location.href = "./login.html"
+					}else{
+						alert(res.message)
+					}
+				})
 			},
-			FnProject: function() {
-				var that = this
+			FnProject: function () {
+				var that = this;
 				var projectUrl = domainUrl + this.projectUrl
-				// getMessage(projectUrl).then(function(){
-				// 	if(res.code == 0){
-				// 	  that.FnCategory()
-				// 	}else{
-				// 		alert(res.message)
-				// 	}
-				// })
+				getMessage(projectUrl).then(function (res) {
+					if (res.code == 200) {
+						if (res.data != null) {
+
+							$('title').text(res.data.name);
+							$('.tit_text').text(res.data.name);
+							$('.textbjt').text(res.data.name);
+
+							that.FnCategory(res.data.id);
+						}
+
+					} else {
+						alert(res.message)
+					}
+				})
 			},
-			FnCategory: function() {
-				var categoryUrl = domainUrl + this.categoryUrl
-				// getMessage(categoryUrl).then(function(){
-				// 	if(res.code == 0){
-				// 	  this.list = res.data
-				// 	}else{
-				// 		alert(res.message)
-				// 	}
-				// })
+			FnCategory: function (projectId) {
+				var that = this;
+				var categoryUrl = domainUrl + this.categoryUrl + "?projectId=" + projectId;
+				getMessage(categoryUrl).then(function (res) {
+					if (res.code == 200) {
+						that.list = res.data;
+					} else {
+						alert(res.message)
+					}
+				})
 				var showcase = $("#showcase")
 				var showcase1 = $("#showcase1")
 
@@ -93,12 +78,12 @@ window.onload = function() {
 					buttonLeft: $("#left"),
 					buttonRight: $("#right"),
 					bringToFront: true,
-					onLoaded: function() {
+					onLoaded: function () {
 						showcase.css('visibility', 'visible')
 						showcase.css('display', 'none')
-						setTimeout(function(){
+						setTimeout(function () {
 							showcase.css('display', 'block')
-						},500)
+						}, 500)
 					}
 				})
 				showcase1.Cloud9Carousel({
@@ -113,22 +98,22 @@ window.onload = function() {
 					buttonLeft: $("#left"),
 					buttonRight: $("#right"),
 					bringToFront: true,
-					onLoaded: function() {
+					onLoaded: function () {
 						showcase1.css('visibility', 'visible')
 						showcase1.css('display', 'none')
-						setTimeout(function(){
+						setTimeout(function () {
 							showcase1.css('display', 'block')
-						},500)
+						}, 500)
 					}
 				})
 
 			},
-			FnHref:function(item){
-				location.href = item.linkUrl
+			FnHref: function (item) {
+				location.href = "/second.html?id="+item.id;
 			},
-			FnTabClick:function(e){
+			FnTabClick: function (e) {
 				var b = $(e.target).addClass('down')
-				setTimeout(function() {
+				setTimeout(function () {
 					b.removeClass('down')
 				}, 80)
 			}

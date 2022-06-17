@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
 	var vm = new Vue({
 		el: '#login',
 		data: {
@@ -25,31 +25,33 @@ window.onload = function() {
 				}]
 			},
 			codeWord: "",
-			loginUrl: 'http://182.61.26.201:9101/index/login',/* 登录地址 */
+			loginUrl: '/index/login',/* 登录地址 */
 			codeUrl: '/index/captcha'/* 获取验证码地址 */
 		},
 
-		created: function() {
+		created: function () {
 
 		},
-		mounted: function() {
+		mounted: function () {
 			this.FnCode()
 		},
 		methods: {
-			submitForm: function(formName) {
+			submitForm: function (formName) {
 				var that = this
-				var loginUrl = this.loginUrl
+				var loginUrl =  domainUrl + this.loginUrl
 				this.$refs[formName].validate((valid) => {
 					if (valid) {
-						postMessage(loginUrl,{
-							userName:that.ruleForm.userName,
-							password:that.ruleForm.passWord,
-							checkCode:that.ruleForm.code
-						},"application/x-www-form-urlencoded").then(function(res){
-							if(res.code == 0){
-								alert("登录成功")
+						postMessage(loginUrl, {
+							userName: that.ruleForm.userName,
+							password: that.ruleForm.passWord,
+							checkCode: that.ruleForm.code,
+							captchaToken: getCookie("captchaAccessToken"),
+						}, "application/json").then(function (res) {
+							if (res.code == 200) {
+								alert("登录成功");
+								setCookie("accessToken", res.data);
 								location.href = "./index.html"
-							}else{
+							} else {
 								alert(res.message)
 							}
 						})
@@ -58,12 +60,15 @@ window.onload = function() {
 					}
 				});
 			},
-			FnCode: function() {
+			FnCode: function () {
 				var that = this
 				var date = new Date()
-				var codeUrl = domainUrl + this.codeUrl+'?date='+date.getTime()
-				getMessage(codeUrl).then(function(res){
-					that.codeWord = res
+				var codeUrl = domainUrl + this.codeUrl + '?date=' + date.getTime()
+				getMessage(codeUrl).then(function (res) {
+					if (res.code == 200) {
+						that.codeWord = res.data.captchaData;
+						setCookie("captchaAccessToken", res.data.captchaAccessToken, 1);
+					}
 				})
 			}
 		}

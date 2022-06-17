@@ -1,54 +1,68 @@
-window.onload = function() {
+window.onload = function () {
 	var vm = new Vue({
 		el: '#second',
 		data: {
 			userName: "负责人",
-			picList: [{
-				title: "评论区维护红路灯大屏",
-				label: "修改标题",
-				editFlag: "false",
-				icon: "img/second/edit.png",
-				src: "img/second/pic.png",
-				linkUrl: "",
-				id: 1
-			}, {
-				title: "评论区维护红路灯大屏",
-				label: "修改标题",
-				editFlag: "false",
-				linkUrl: "",
-				icon: "img/second/edit.png",
-				src: "img/second/pic.png",
-				id: 2
-			}],
-			logOutUrl: "",
+			picList: [
+				// {
+				// 	title: "核心数据大屏",
+				// 	label: "修改标题",
+				// 	editFlag: "false",
+				// 	icon: "img/second/edit.png",
+				// 	src: "img/second/screen1.jpg",
+				// 	linkUrl: "",
+				// 	id: 1
+				// }, {
+				// 	title: "全网舆情数据大屏",
+				// 	label: "修改标题",
+				// 	editFlag: "false",
+				// 	linkUrl: "",
+				// 	icon: "img/second/edit.png",
+				// 	src: "img/second/screen2.jpg",
+				// 	id: 2
+				// },
+				// {
+				// 	title: "整个分发数据大屏",
+				// 	label: "修改标题",
+				// 	editFlag: "false",
+				// 	linkUrl: "",
+				// 	icon: "img/second/edit.png",
+				// 	src: "img/second/screen3.jpg",
+				// 	id: 2
+				// }
+			],
+			logOutUrl: "/index/loginOut",
 			/* 退出接口路径 */
-			listUrl: "",
+			listUrl: "/categoryScreenConfig/get?categoryId=",
 			/* 列表接口路径 */
-			useUrl: "",
+			useUrl: "/user/getCurrentUser",
 			/* 获取当前用户接口路径 */
-			saveUrl: "",
+			saveUrl: "/categoryScreenConfig/save",
+			/* 保存大屏配置路径 */
+			queryCategoryUrl: "/category/get",
 		},
 
-		created: function() {
+		created: function () {
 
 		},
-		mounted: function() {
+		mounted: function () {
 			this.FnList()
+			this.FnUser()
 		},
 		methods: {
 			/* 退出 */
-			FnLogOut: function() {
+			FnLogOut: function () {
 				var logOutUrl = domainUrl + this.logOutUrl
-				// getMessage(logOutUrl).then(function(){
-				// 	if(res.code == 0){
-				// 	  location.href = "./login.html"
-				// 	}else{
-				// 		alert(res.message)
-				// 	}
-				// })
+				getMessage(logOutUrl).then(function (res) {
+					if (res.code == 200) {
+						location.href = "./login.html"
+					} else {
+						alert(res.message)
+					}
+				})
 			},
 			/* 修改标题保存接口 */
-			FnFlag: function(val) {
+			FnFlag: function (val) {
 				var that = this
 				var saveUrl = domainUrl + this.saveUrl
 				if (val.editFlag) {
@@ -60,41 +74,66 @@ window.onload = function() {
 				}
 				val.editFlag = !val.editFlag
 				if (val.label == "确定") {
-					// getMessage(saveUrl).then(function(){
-					// 	if(res.code == 0){
-					// 	  that.FnList()
-					// 	}else{
-					// 		alert(res.message)
-					// 	}
-					// })
+					postMessage(saveUrl, {
+						id: val.id,
+						categoryId: val.categoryId,
+						name: val.title,
+						type: val.type
+
+					}, "application/json").then(function (res) {
+						if (res.code == 200) {
+							that.FnList()
+						} else {
+							alert(res.message)
+						}
+					})
 				}
 			},
 			/* 获取列表 */
-			FnList: function() {
+			FnList: function () {
 				var that = this
-				var listUrl = domainUrl + this.listUrl
-				// getMessage(listUrl).then(function(){
-				// 	if(res.code == 0){
-				// 	  that.picList = res.data
-				// 	}else{
-				// 		alert(res.message)
-				// 	}
-				// })
+				var listUrl = domainUrl + this.listUrl + getQuery("id");
+				getMessage(listUrl).then(function (res) {
+					if (res.code == 200) {
+						that.picList = [];
+						res.data.forEach(item => {
+							var linkUrlData = "/datashow.html";//核心数据daping 
+							if (item.type == 2) {
+								linkUrlData = "/negative.html";//全网舆情数据大屏
+							} else if (item.type == 3) {
+								linkUrlData = "/remark.html";//整个分发数据大屏
+							}
+							that.picList.push({
+								title: item.name,
+								label: "修改标题",
+								editFlag: "false",
+								linkUrl: linkUrlData,
+								icon: "img/second/edit.png",
+								src: "img/second/screen" + item.type + ".jpg",
+								id: item.id,
+								type: item.type,
+								categoryId: item.categoryId
+							});
+						});
+					} else {
+						alert(res.message)
+					}
+				})
 			},
-			FnLink: function(link) {
+			FnLink: function (link) {
 				location.href = link
 			},
 			/* 获取当前用户 */
-			FnUser: function() {
+			FnUser: function () {
 				var that = this
 				var useUrl = domainUrl + this.useUrl
-				// getMessage(useUrl).then(function(){
-				// 	if(res.code == 0){
-				// 	  that.userName = res.data.userName
-				// 	}else{
-				// 		alert(res.message)
-				// 	}
-				// })
+				getMessage(useUrl).then(function (res) {
+					if (res.code == 200) {
+						that.userName = res.data
+					} else {
+						alert(res.message)
+					}
+				})
 			}
 		}
 
