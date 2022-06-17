@@ -1,0 +1,45 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body,
+html {
+    width: 100%;
+    min-width: 1200px;
+    height: 100%;
+    overflow: hidden;
+    -webkit-text-size-adjust: none;
+}
+
+i {
+	font-style: normal;
+}
+
+a {
+	text-decoration: none;
+	outline: none;
+}
+
+ol,
+ul,
+li {
+	list-style: none;
+}
+
+b,
+strong {
+	font-weight: normal;
+}
+
+textarea {
+	/* 文本域拉伸，根据需求而定 */
+	resize: none；
+}
+
+input,
+button,
+textarea {
+	outline: none;
+}
+[v-cloak]{display: none !important;}

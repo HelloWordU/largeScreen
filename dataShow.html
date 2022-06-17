@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>核心数据页</title>
+		<link rel="stylesheet" type="text/css" href="css/public/element.css" />
+		<link rel="stylesheet" type="text/css" href="css/public/swiper-bundle.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/private/dataShow.css" />
+		<link rel="stylesheet" type="text/css" href="css/public/public.css" />
+	</head>
+	<body>
+		<div id="datashow" class="datashow pub_class" v-cloak>
+			<div class="title">
+				<span class="tit_text">核心数据大屏</span>
+				<div class="right_btn">
+					<span class="return" @click="FnReturn">返回主页</span>
+				</div>
+			</div>
+			<div class="content">
+				<div class="con_top">
+					<div class="reach_warp traffic_pub">
+						<div class="title_pub">
+							<span>达标率7日走势图</span>
+						</div>
+						<div class="label_con">
+							<div class="label_top">
+								<p><span>达标</span><i>{{reachNum}}</i></p>
+								<p><span>不达标</span><i>{{noReachNum}}</i></p>
+								<p><span>总核心人口数</span><i>{{totalNum}}</i></p>
+							</div>
+							<div class="icon_list" style="margin-top: 15px;">
+								<span><i class="yuan yuan1"></i><i>自身</i></span>
+								<span><i class="yuan yuan2"></i><i>竞品</i></span>
+								<span><i class="yuan yuan3"></i><i>行业</i></span>
+								<span><i class="yuan yuan4"></i><i>对比</i></span>
+							</div>
+						</div>
+						<div id="lineChart"></div>
+					</div>
+					<div class="detail_warp traffic_pub">
+						<div class="title_pub">
+							<span>核心入口详情</span>
+						</div>
+						<div class="swiper mySwiper">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide detail_list" v-for="(item,index) in detailList" :key="index">
+									<span class="detail_label" :class="'label'+item.labelType">{{item.label}}</span>
+									<i class="line"></i>
+									<span class="detail_label1">{{item.isReach}}</span>
+									<i class="line"></i>
+									<span class="detail_tit">{{item.title}}</span>
+									<p class="border_line"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="search_con">
+					<div class="search_main">
+						<span>{{searchText}}</span>
+						<i class="line"></i>
+						<div class="inpu_search">
+							<el-input v-model="keyWord"></el-input>
+							<span class="search_btn" @click="FnSearch"></span>
+						</div>
+					</div>
+					<div class="swiper searchSwiper search_list">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide" v-for="(item,index) in searchList" :key="index">
+								<span class="link_text" v-html="item.title"></span>
+								<span class="link_url">{{item.url}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<img src="img/dataShow/border.png" class="bot_img">
+		</div>
+	</body>
+	<script src="js/public/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/swiper-bundle.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/element.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/public.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/private/dataShow.js" type="text/javascript" charset="utf-8"></script>
+</html>

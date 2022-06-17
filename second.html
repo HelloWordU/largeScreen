@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>华为P50项目大屏</title>
+		<link rel="stylesheet" type="text/css" href="css/public/element.css"/>
+		<link rel="stylesheet" type="text/css" href="css/private/second.css" />
+		<link rel="stylesheet" type="text/css" href="css/public/public.css" />
+	</head>
+	<body>
+		<div id="second" class="second pub_class" v-cloak>
+			<div class="title">
+				<span class="tit_text">华为P50项目大屏</span>
+				<div class="right_btn">
+					<span class="user"><img src="img/second/user.png" ><i>{{userName}}</i></span>
+					<span class="log_out" @click="FnLogOut">退出</span>
+				</div>
+			</div>
+			<div class="content" id="content">
+				<div class="pic_show">
+					<div class="pic_list">
+						<div  v-for="(item,index) in picList" class="pic_div">
+							<div class="pic_title">
+								<el-input v-if="!item.editFlag" v-model="item.title" placeholder="请输入标题" maxLength="10"></el-input>
+								<p v-if="item.editFlag">{{item.title}}</p>
+								<span @click="FnFlag(item)">{{item.label}}<img :src="item.icon" ></span>
+							</div>
+							<img :src="item.src" @click="FnLink(item.link)" >
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/public/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/element.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/public.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/private/second.js" type="text/javascript" charset="utf-8"></script>
+</html>

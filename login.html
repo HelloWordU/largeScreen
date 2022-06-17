@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>登录</title>
+		<link rel="stylesheet" href="css/public/element.css">
+		<link rel="stylesheet" type="text/css" href="css/private/login.css" />
+		<link rel="stylesheet" type="text/css" href="css/public/public.css" />
+	</head>
+	<body>
+		<div id="login" class="login" v-cloak>
+			<div class="title">
+				<img class="logo" src="img/login/logo.png" alt="">
+				<i></i>
+				<img class="text" src="img/login/text.png" alt="">
+				<img class="tops" src="img/login/top3.png">
+			</div>
+			<div class="content">
+				<div class="con_left">
+					<img src="img/login/left.png">
+				</div>
+				<div class="con_right">
+					<p>欢迎登录</p>
+					<el-form :model="ruleForm" :rules="rules" ref="ruleForm">
+						<el-form-item prop="userName" class="pub_input">
+							<img src="img/login/user.png" alt="">
+							<el-input v-model="ruleForm.userName" placeholder="请输入登录ID"></el-input>
+						</el-form-item>
+						<el-form-item  prop="passWord"  class="pub_input">
+							<img src="img/login/password.png" alt="">
+							<el-input v-model="ruleForm.passWord" type="password" placeholder="请输入密码"></el-input>
+						</el-form-item>
+						<el-form-item  prop="code"  class="pub_input code_input">
+							<img src="img/login/code.png" alt="">
+							<el-input v-model="ruleForm.code"  placeholder="请输入验证码"></el-input>
+							<img :src="codeWord" class="code_word"></span>
+						</el-form-item>
+						 <el-form-item>
+						    <el-button type="primary" @click="submitForm('ruleForm')" class="login_btn">登 录</el-button>
+						  </el-form-item>
+					</el-form>
+					<img class="shan1" src="img/login/di1.png" alt="">
+					<img class="shan2" src="img/login/di2.png" alt="">
+				</div>
+			</div>
+			<div class="bottom">
+				<img src="img/login/vi.png">
+			</div>
+		</div>
+	</body>
+	<script src="js/public/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/element.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/public.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/private/login.js" type="text/javascript" charset="utf-8"></script>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>全网舆情数据大屏</title>
+		<link rel="stylesheet" type="text/css" href="css/private/negative.css" />
+		<link rel="stylesheet" type="text/css" href="css/public/public.css" />
+	</head>
+	<body>
+		<div id="negative" class="negative pub_class" v-cloak>
+			<div class="title">
+				<span class="tit_text">全网舆情数据大屏</span>
+				<div class="right_btn">
+					<span class="return" @click="FnReturn">返回主页</span>
+				</div>
+			</div>
+			<div class="content">
+				<div class="survey_warp traffic_pub">
+					<div class="title_pub">
+						<span>全网调查率</span>
+						<div class="icon_list">
+							<span><img src="img/negative/icon_g.png"/><i>负面率达标（优）</i></span>
+							<span><img src="img/negative/icon_y.png"/><i>负面率达标（中）</i></span>
+							<span><img src="img/negative/icon_r.png"/><i>负面率超标</i></span>
+						</div>
+					</div>
+					<div class="survey_con traffic_con">
+						<div v-for="(item,index) in surveyList" :key="index">
+							<img v-if="item.value == 1" src="img/negative/green.png" >
+							<img v-if="item.value == 0" src="img/negative/yellow.png" >
+							<img v-if="item.value == -1" src="img/negative/red.png" >
+							<i>{{item.key}}</i>
+						</div>
+					</div>
+					<p class="time_line"></p>
+				</div>
+				<div class="headline_warp traffic_pub">
+					<div class="title_pub">
+						<span>五大门户和头条</span>
+						<div class="icon_list">
+							<span><img src="img/negative/icon_g.png"/><i>负面率达标（优）</i></span>
+							<span><img src="img/negative/icon_y.png"/><i>负面率达标（中）</i></span>
+							<span><img src="img/negative/icon_r.png"/><i>负面率超标</i></span>
+						</div>
+					</div>
+					<div class="headline_con traffic_con">
+						<div v-for="(item,index) in surveyList" :key="index">
+							<img v-if="item.value == 1" src="img/negative/green.png" >
+							<img v-if="item.value == 0" src="img/negative/yellow.png" >
+							<img v-if="item.value == -1" src="img/negative/red.png" >
+							<i>{{item.key}}</i>
+						</div>
+					</div>
+					<p class="time_line"></p>
+				</div>
+				<div class="trend_chart">
+					<div class="title_pub" style="padding-top: 5px;">
+						<span>五大门户和头条的负面走势图</span>
+						<div class="icon_list" style="margin-top: 15px;">
+							<span><i class="yuan yuan1"></i><i>网易</i></span>
+							<span><i class="yuan yuan2"></i><i>头条</i></span>
+							<span><i class="yuan yuan3"></i><i>腾讯</i></span>
+							<span><i class="yuan yuan4"></i><i>新浪</i></span>
+							<span><i class="yuan yuan5"></i><i>搜狐</i></span>
+							<span><i class="yuan yuan6"></i><i>凤凰网</i></span>
+							<span><i class="line">--</i><i>警戒线</i></span>
+						</div>
+					</div>
+					<div id="lineChart"></div>
+					
+				</div>
+			</div>
+			<img src="img/negative/border.png" class="bot_img">
+		</div>
+	</body>
+	<script src="js/public/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="./js/public/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/public.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/private/negative.js" type="text/javascript" charset="utf-8"></script>
+</html>

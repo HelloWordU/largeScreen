@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>华为项目大屏</title>
+		<link rel="stylesheet" href="css/public/element.css">
+		<link rel="stylesheet" type="text/css" href="css/private/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/public/public.css" />
+	</head>
+	<body>
+		<div id="index" class="index" v-cloak>
+			<div class="title">
+				<span class="tit_text">华为项目大屏</span>
+				<div class="right_btn">
+					<span class="amend" @click="FnAmend">修改密码</span>
+					<span class="deploy" @click="FnDeploy">配置</span>
+					<span class="log_out" @click="FnLogOut">退出</span>
+				</div>
+			</div>
+			<div class="content" id="content">
+				<div id="showcase" class="noselect"> 
+					<div class="img_con" v-for="(item,index) in list" :key="index">
+					    <img class="cloud9-item" src="img/index/radius.png">
+						<div class="carousel-caption">{{item.title}}</div>
+					</div>
+				</div>
+				<div id="showcase1" class="noselect">
+					<div class="trans" v-for="(item,index) in list" :key="index" @click="FnHref(item)"></div>
+				</div>
+				<span id="left" @click="FnTabClick"></span>
+				<span id="right" @click="FnTabClick"></span>
+				<p class="p_bjt1"></p>
+				<p class="p_bjt2"></p>
+				<p class="p_bjt3"></p>
+				<div class="textbjt">华为项目大屏</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/public/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/jquery.reflection.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/jquery.cloud9carousel.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/element.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/public.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/private/index.js" type="text/javascript" charset="utf-8"></script>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>整合分发数据大屏</title>
+		<link rel="stylesheet" type="text/css" href="css/public/swiper-bundle.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/private/remark.css" />
+		<link rel="stylesheet" type="text/css" href="css/public/public.css" />
+	</head>
+	<body>
+		<div id="remark" class="remark pub_class" v-cloak>
+			<div class="title">
+				<span class="tit_text">整合分发数据大屏</span>
+				<div class="right_btn">
+					<span class="return" @click="FnReturn">返回主页</span>
+				</div>
+			</div>
+			<div class="content">
+				<div class="con_top">
+					<div class="publish_warp traffic_pub">
+						<div class="title_pub">
+							<span>华为发布</span>
+						</div>
+						<div class="publish_con">
+							<div class="pub_con">
+								<p><span>撰写目标</span><i>{{publishData.write}}</i></p>
+								<i></i>
+								<p><span>已撰写</span><i>{{publishData.haveRrite}}</i></p>
+							</div>
+							<div class="pub_con">
+								<p><span>发布目标</span><i>{{publishData.publish}}</i></p>
+								<i></i>
+								<p><span>已发布</span><i>{{publishData.havepublish}}</i></p>
+							</div>
+							<div class="pub_con">
+								<p><span>阅读量目标</span><i>{{publishData.read}}</i></p>
+								<i></i>
+								<p><span>已完成</span><i>{{publishData.haveRead}}</i></p>
+							</div>
+						</div>
+
+					</div>
+					<div class="hot_warp traffic_pub">
+						<div class="title_pub">
+							<span>近期热点</span>
+						</div>
+						<div class="swiper mySwiper">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide hot_list" v-for="(item,index) in hotList" :key="index">
+									<img v-if="index<=2" :src="'img/remark/pic'+index+'.png'">
+									<i v-if="index>2" class="hot_num">{{index+1}}</i>
+									<span class="hot_tit">{{item.title}}</span>
+									<img class="outline" src="img/remark/outline.png" >
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="word_warp traffic_pub">
+						<div class="title_pub">
+							<span>近期行业热词</span>
+						</div>
+						<div class="swiper wordSwiper">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide word_list" v-for="(item,index) in wordList" :key="index">
+									<img v-if="index<=2" :src="'img/remark/pic'+index+'.png'">
+									<i v-if="index>2" class="hot_num">{{index+1}}</i>
+									<span class="hot_tit">{{item.title}}</span>
+									<img class="outline outline1" src="img/remark/outline.png" >
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="article_con">
+					<div class="title_pub" style="margin-bottom: 15px;">
+						<span>本周亮点文章</span>
+					</div>
+					<div class="swiper articleSwiper">
+						<div class="swiper-wrapper article_list">
+							<div class="swiper-slide word_list" v-for="(item,index) in articleList" :key="index">
+								<img src="img/remark/-huangguan.png">
+								<div class="article_main">
+									<p class="article_tit">{{item.title}}</p>
+									<div class="article_text">
+										<span>来源：</span>
+										<i>{{item.source}}</i>
+										<img src="img/remark/line.png">
+										<span>作者：</span>
+										<i>{{item.author}}</i>
+										<img src="img/remark/line.png">
+										<span>阅读量：</span>
+										<i>{{item.readNum}}</i>
+										<img src="img/remark/line.png">
+										<span>互动量：</span>
+										<i>{{item.interactionNum}}</i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<img src="img/negative/border.png" class="bot_img">
+		</div>
+	</body>
+	<script src="js/public/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/swiper-bundle.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/public/public.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/private/remark.js" type="text/javascript" charset="utf-8"></script>
+</html>

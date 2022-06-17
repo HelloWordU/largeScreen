@@ -1,0 +1,62 @@
+#remark{position: absolute;top: 0;width: 1920px;height: 1080px;left: 50%;margin-left: -960px;-webkit-transform-origin: 50% 0%;-ms-transform-origin: 50% 0%;transform-origin: 50% 0%;overflow: hidden;background: url(../../img/remark/bjt.png) no-repeat center center;}
+.title{width: 1916px;height: 70px;display: flex;justify-content: center;align-items: center;background: url(../../img/negative/title.png) no-repeat center center;margin-top: 90px;position: relative;}
+.title_add{margin-top: 65px;}
+
+.tit_text{font-size: 48px;font-family: PingFangSC-Regular, PingFang SC;font-weight: 400;color: #FFFFFF;margin-top: -110px;}
+.right_btn{position: absolute;right: 250px;top: -35px;}
+.right_btn span{font-size: 24px;font-family: MicrosoftYaHei;color: #FFFFFF;margin-right: 30px;cursor: pointer;}
+
+.tit_textadd{margin-top: -85px;}
+.content{margin-top: 20px;}
+
+.content_top{margin-top: 10px;}
+
+.con_top{display: flex;justify-content: space-between;align-items: center;padding: 0 42px 0 40px;}
+
+.traffic_pub{margin-bottom: 24px;position: relative;}
+
+.traffic_pubt{margin-bottom: 15px;}
+
+.publish_warp,.word_warp{width: 389px;height: 360px;background: url(../../img/remark/leftbjt.png) no-repeat;}
+.hot_warp{width: 1016px;height: 360px;background: url(../../img/remark/centerbjt.png) no-repeat;}
+
+.title_pub{padding: 10px 49px 0 24px;}
+.title_pub>span{font-size: 20px;font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;font-weight: bold;color: #FFFFFF;}
+.publish_con{padding-top: 28px;}
+.pub_con{width: 338px;height: 72px;background: url(../../img/remark/textbjt.png) no-repeat;display: flex;justify-content: space-between;align-items: center;margin: 0 25px 22px 25px;}
+.pub_con p{width: 168px;display: flex;flex-direction: column;align-items: center;justify-content: center;}
+.pub_con>i{display: block;width: 1px;height: 26px;background: #00C0FF;}
+.pub_con p span{font-size: 14px;font-family: MicrosoftYaHei;color: #FFFFFF;line-height: 14px;}
+.pub_con p i{font-size: 20px;font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;font-weight: bold;color: #8EC7DC;line-height: 20px;margin-top: 6px;}
+
+.traffic_pub .swiper{padding: 8px 29px;}
+.traffic_pub .swiper-wrapper{height: 300px;}
+.traffic_pub .swiper-slide{display: flex;align-items: center;width: 964px;height: 60px;position: relative;}
+.traffic_pub .swiper-slide img{display: block;width: 32px;height: 32px;margin-right: 20px;margin-left: 3px;}
+.traffic_pub .swiper-slide .outline{width: 964px;height: 2px;position: absolute;bottom: 0;left: 0;margin: 0;}
+.traffic_pub .swiper-slide .outline1{width: 337px;}
+.traffic_pub .swiper-slide i{width: 30px;height: 30px;border: 1px solid #2773E6;margin-right: 20px;text-align: center;line-height: 30px;font-size: 16px;font-family: MicrosoftYaHei;color: #2773E6;border-radius: 30px;}
+.traffic_pub .swiper-slide .hot_tit{display: block;width: 898px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: 20px;font-family: MicrosoftYaHei;color: #FFFFFF;}
+
+.traffic_pub .word_list{width: 337px;height: 60px;}
+.traffic_pub .word_list .hot_tit{width: 265px;}
+
+
+.article_con{width: 1838px;height: 428px;background: url(../../img/remark/botbjt.png) no-repeat;margin: 0 40px;}
+
+.article_con .swiper{height: 350px;margin: -5px 25px 0 25px;}
+.article_con .swiper-wrapper{height: 350px;}
+
+.article_list .swiper-slide{height: 70px;border-bottom: 1px solid #044B98;display: flex;align-items: center;font-size: 14px;font-family: MicrosoftYaHei;}
+.article_list .swiper-slide>img{display: block;width: 36px;height: 32px;margin-left: 3px;}
+
+.article_list .swiper-slide>div{width: 1647px;display: flex;flex-direction: column;align-items: center;margin-left: 20px;}
+.article_list .swiper-slide p{width: 1650px;font-size: 20px;font-family: MicrosoftYaHei;color: #FFFFFF;
+overflow: hidden;text-overflow: ellipsis;white-space: nowrap;margin-bottom: 8px;line-height: 20px;}
+.article_text{display: flex;align-items: center;width: 1647px;}
+.article_text span{color: #8EC7DC;}
+.article_text i{color: #FFFFFF;}
+.article_text img{display: block;width: 1px;height: 11px;margin: 0 8px 0 14px;}
+
+.bot_img{display: block;width: 1846px;height: 60px;margin-top: 30px;margin-bottom: 14px;}
+.swiper-slide:hover{background: rgba(1, 79, 152, 0.4);}

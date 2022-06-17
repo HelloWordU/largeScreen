@@ -1,0 +1,38 @@
+#negative{position: absolute;top: 0;width: 1920px;height: 1080px;left: 50%;margin-left: -960px;-webkit-transform-origin: 50% 0%;-ms-transform-origin: 50% 0%;transform-origin: 50% 0%;overflow: hidden;background: url(../../img/negative/bjt.png) no-repeat center center;}
+.title{width: 1916px;height: 70px;display: flex;justify-content: center;align-items: center;background: url(../../img/negative/title.png) no-repeat center center;margin-top: 90px;position: relative;}
+.title_add{margin-top: 65px;}
+.tit_text{font-size: 48px;font-family: PingFangSC-Regular, PingFang SC;font-weight: 400;color: #FFFFFF;margin-top: -110px;}
+.right_btn{position: absolute;right: 250px;top: -35px;}
+.right_btn span{font-size: 24px;font-family: MicrosoftYaHei;color: #FFFFFF;margin-right: 30px;cursor: pointer;}
+
+.tit_textadd{margin-top: -85px;}
+.content{margin-top: 20px;}
+.content_top{margin-top: 10px;}
+.traffic_pub{width: 1838px;height: 225px;background: url(../../img/negative/bjt_t.png) no-repeat;margin: 0 auto;margin-bottom: 24px;background-size: 100% 100%;position: relative;}
+.title_pub{display: flex;justify-content: space-between;align-items: center;padding: 10px 49px 0 24px;}
+.title_pub>span{font-size: 20px;font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;font-weight: bold;color: #FFFFFF;}
+.icon_list span,.icon_list{display: flex;align-items: center;margin-right: 24px;}
+.icon_list{margin: 0;}
+.icon_list span:last-child{margin-right: 0;}
+.icon_list img{display: block;width: 16px;height: 14px;}
+.icon_list i{font-size: 14px;font-family: MicrosoftYaHei;color: #FFFFFF;margin-left: 10px;}
+
+.trend_chart{width: 1838px;height: 310px;background: url(../../img/negative/bjt_b.png) no-repeat;background-size: 100% 100%;margin: 0 auto;}
+.bot_img{display: block;width: 1846px;height: 60px;margin-top: 30px;margin-bottom: 14px;}
+
+.traffic_con{display: flex;align-items: center;width: 1777px;padding-left: 27px;margin-top: 25px;}
+.time_line{width: 1777px;height: 25px;background: url(../../img/negative/line.png) no-repeat; position: absolute;bottom: 34px;
+left: 27px;}
+.traffic_con div{display: flex;flex-direction: column;align-items: center;width: 71px;}
+.traffic_con img{display: block;width: 37px;height: 110px;}
+.traffic_con i{display: block;margin-top: 17px;font-size: 16px;font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;font-weight: bold;color: #8EC7DC;}
+#lineChart{width: 1920px;height: 280px;margin-left: -40px;margin-top: -20px;}
+.jingjie{position: absolute;top: 0;right: 0;font-size: 14px;font-family: MicrosoftYaHei;color: #FFFFFF;}
+.icon_list .yuan{width: 14px;height: 14px;display: block;border-radius: 14px;}
+.yuan1{border: 1px solid #FF1C1C;}
+.yuan2{border: 1px solid #D96729;}
+.yuan3{border: 1px solid #BE55E1;}
+.yuan4{border: 1px solid #159FFF;}
+.yuan5{border: 1px solid #36B77F;}
+.yuan6{border: 1px solid #FAAD14;}
+.icon_list .line{color: #FB4D4B;}
