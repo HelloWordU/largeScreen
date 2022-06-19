@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>修改密码</title>
+	<link rel="stylesheet" type="text/css" href="css/public/element.css" />
+	<link rel="stylesheet" type="text/css" href="css/private/second.css" />
+	<link rel="stylesheet" type="text/css" href="css/public/public.css" />
+</head>
+
+<body>
+	<div id="second" class="second pub_class" v-cloak>
+		<div class="title">
+			<span class="tit_text">修改密码</span>
+			<div class="right_btn">
+				<span class="user"><img src="img/second/user.png"><i>{{userName}}</i></span>
+				<span class="log_out" @click="FnLogOut">退出</span>
+			</div>
+		</div>
+		<div class="content" id="content">
+			<div class="pic_show">
+				<div class="pic_list">
+					<el-form :model="ruleForm" :rules="rules" ref="ruleForm">
+						<el-form-item  prop="passWord"  class="pub_input">
+							<img src="img/login/password.png" alt="">
+							<el-input v-model="ruleForm.passWord" type="password" placeholder="请输入密码"></el-input>
+						</el-form-item>
+						<el-form-item  prop="code"  class="pub_input code_input">
+							<img src="img/login/password.png" alt="">
+							<el-input v-model="ruleForm.newPassWord" type="password" placeholder="请输入新密码"></el-input>
+						</el-form-item>
+						<el-form-item  prop="code"  class="pub_input code_input">
+							<img src="img/login/password.png" alt="">
+							<el-input v-model="ruleForm.newPassWordConfirm" type="password" placeholder="请确认新密码"></el-input>
+						</el-form-item>
+						 <el-form-item>
+						    <el-button type="primary" @click="submitForm('ruleForm')" class="login_btn">确定</el-button>
+							<el-button type="primary" @click="submitForm('ruleForm')" class="login_btn">取消</el-button>
+						  </el-form-item>
+					</el-form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="js/public/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/public/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/public/vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/public/element.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/public/public.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	window.onload = function () {
+		var vm = new Vue({
+			el: '#second',
+			data:{
+				userName: "负责人",
+				logOutUrl: "/index/loginOut",
+				useUrl: "/user/getCurrentUser",
+				modifyPwUrl: "/user/modifyPwd",
+				ruleForm: {
+				passWord: '',/* 密码 */
+				newPassWord: '',/* 新密码 */
+				newPassWordConfirm: ''/* 新密码 */
+			},
+			rules: {
+				passWord: [{
+					required: true,
+					message: '请输入密码',
+					trigger: 'blur'
+				}],
+				newPassWord: [{
+					required: true,
+					message: '请输入新密码',
+					trigger: 'blur'
+				}],
+				newPassWordConfirm: [{
+					required: true,
+					message: '请确认新密码',
+					trigger: 'blur'
+				}]
+			},
+			},
+			created: function () {
+
+			},
+			mounted: function () {
+				this.FnUser()
+			},
+			methods: {
+				submitForm: function (formName) {
+				var that = this
+				var modifyPwUrl =  domainUrl + this.modifyPwUrl
+				this.$refs[formName].validate((valid) => {
+					if (valid) {
+						postMessage(modifyPwUrl, {
+							passWord: that.ruleForm.passWord,
+							newPassWord: that.ruleForm.newPassWord,
+							newPassWordConfirm: that.ruleForm.newPassWordConfirm,
+						}, "application/json").then(function (res) {
+							if (res.code == 200) {
+								alert("修改成功");
+								location.href = "./login.html"
+							} else {
+								alert(res.message)
+							}
+						})
+					} else {
+						return false;
+					}
+				});
+			},
+							/* 退出 */
+			FnLogOut: function () {
+				var logOutUrl = domainUrl + this.logOutUrl
+				getMessage(logOutUrl).then(function (res) {
+					if (res.code == 200) {
+						location.href = "./login.html"
+					} else {
+						alert(res.message)
+					}
+				})
+			},
+			/* 获取当前用户 */
+			FnUser: function () {
+				var that = this
+				var useUrl = domainUrl + this.useUrl
+				getMessage(useUrl).then(function (res) {
+					if (res.code == 200) {
+						that.userName = res.data
+					} else {
+						alert(res.message)
+					}
+				})
+			}
+			}
+		})
+	}
+</script>
+
+</html>

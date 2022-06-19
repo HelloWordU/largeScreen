@@ -18,7 +18,7 @@ window.onload = function () {
 		methods: {
 			/* 修改密码 */
 			FnAmend() {
-
+				location.href = "./pwModify.html"
 			},
 			/* 配置 */
 			FnDeploy() {
@@ -27,10 +27,10 @@ window.onload = function () {
 			/* 退出 */
 			FnLogOut() {
 				var logOutUrl = domainUrl + this.logOutUrl
-				getMessage(logOutUrl).then(function(res){
-					if(res.code == 200){
-					  location.href = "./login.html"
-					}else{
+				getMessage(logOutUrl).then(function (res) {
+					if (res.code == 200) {
+						location.href = "./login.html"
+					} else {
 						alert(res.message)
 					}
 				})
@@ -110,7 +110,7 @@ window.onload = function () {
 
 			},
 			FnHref: function (item) {
-				location.href = "/second.html?cid="+item.id;
+				location.href = "/second.html?cid=" + item.id;
 			},
 			FnTabClick: function (e) {
 				var b = $(e.target).addClass('down')
