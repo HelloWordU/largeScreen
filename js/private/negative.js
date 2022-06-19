@@ -1,67 +1,70 @@
-window.onload = function() {
+window.onload = function () {
 	var vm = new Vue({
 		el: '#negative',
 		data: {
 			echarts: '',
 			/* 全网列表 */
-			surveyList: [{"value":1,"key":"00时"},{"value":0,"key":"01时"},{"value":-1,"key":"02时"}],
+			surveyList: [{ "value": 1, "key": "00时" }, { "value": 0, "key": "01时" }, { "value": -1, "key": "02时" }],
 			/* 五大列表 */
-			headlineList: [{"value":1,"key":"00时"},{"value":0,"key":"01时"},{"value":-1,"key":"02时"}],
-			surveyUrl:"",/* 全网 url */
-			headlineUrl:"",/* 五大 url */
-			echartsUrl:""/* 走势图 url */
+			headlineList: [{ "value": 1, "key": "00时" }, { "value": 0, "key": "01时" }, { "value": -1, "key": "02时" }],
+			surveyUrl: "/negativeRate/getAll?categoryId=",/* 全网 url */
+			headlineUrl: "/negativeRate/getGateWay?categoryId=",/* 五大 url */
+			echartsUrl: "/negativeRate/getGateWayRate?categoryId="/* 走势图 url */
 		},
 
-		created: function() {
-			
+		created: function () {
+
 		},
-		mounted: function() {
+		mounted: function () {
 			this.FnSurveyList()
 			this.FnHeadlineList()
 			this.FnEchartsList()
 		},
 		methods: {
 			/* 返回主页 */
-			FnReturn:function() {
+			FnReturn: function () {
 				location.href = "./index.html"
 			},
 			/* 全网调查率 */
-			FnSurveyList:function(){
+			FnSurveyList: function () {
 				var that = this
-				var surveyUrl = domainUrl + this.surveyUrl
-				// getMessage(surveyUrl).then(function(){
-				// 	if(res.code == 0){
-				// 	  that.surveyList = res.data
-				// 	}else{
-				// 		alert(res.message)
-				// 	}
-				// })
+				var surveyUrl = domainUrl + this.surveyUrl + getQuery("cid")
+				getMessage(surveyUrl).then(function (res) {
+					if (res.code == 200) {
+						that.surveyList = res.data
+					} else {
+						alert(res.message)
+					}
+				})
 			},
 			/* 五大门户和头条 */
-			FnHeadlineList:function(){
+			FnHeadlineList: function () {
 				var that = this
-				var headlineUrl = domainUrl + this.headlineUrl
-				// getMessage(headlineUrl).then(function(){
-				// 	if(res.code == 0){
-				// 	  that.headlineList = res.data
-				// 	}else{
-				// 		alert(res.message)
-				// 	}
-				// })
+				var headlineUrl = domainUrl + this.headlineUrl + getQuery("cid")
+				getMessage(headlineUrl).then(function (res) {
+					if (res.code == 200) {
+						that.headlineList = res.data
+					} else {
+						alert(res.message)
+					}
+				})
 			},
 			/* 五大门户和头条的负面走势图 */
-			FnEchartsList:function(){
+			FnEchartsList: function () {
 				var that = this
-				var echartsUrl = domainUrl + this.echartsUrl
-				// getMessage(echartsUrl).then(function(){
-				// 	if(res.code == 0){
-				// 	  that.FnEcharts(res.data.wyData,res.data.ttData,res.data.txData,res.data.xlData,res.data.shData,res.data.fhwData)
-				// 	}else{
-				// 		alert(res.message)
-				// 	}
-				// })
+				var echartsUrl = domainUrl + this.echartsUrl + getQuery("cid")
+				getMessage(echartsUrl).then(function (res) {
+					if (res.code == 200) {
+						that.FnEcharts(res.data.wyData, 
+							res.data.ttData, res.data.txData,
+							 res.data.xlData, res.data.shData, 
+							 res.data.fhwData,res.data.timeData)
+					} else {
+						alert(res.message)
+					}
+				})
 			},
-			FnEcharts:function(wyData,ttData,txData,xlData,shData,fhwData) {
+			FnEcharts: function (wyData, ttData, txData, xlData, shData, fhwData,timeData) {
 				this.echarts = echarts.init(document.getElementById("lineChart"));
 				var option = {
 					tooltip: {
@@ -76,9 +79,7 @@ window.onload = function() {
 					xAxis: {
 						type: 'category',
 						boundaryGap: false,
-						data: ['00时', '01时', '02时', '03时', '04时', '05时', '06时', '07时', '08时', '09时', '10时', '11时', '12时', '13时',
-							'14时', '15时', '16时', '17时', '18时', '19时', '20时', '21时', '22时', '23时', '24时'
-						],
+						data: timeData,
 						axisLine: { //x轴线的颜色以及宽度
 							show: true,
 							lineStyle: {
@@ -90,7 +91,7 @@ window.onload = function() {
 					},
 					yAxis: {
 						type: 'value',
-						
+
 						axisLine: {
 							show: true,
 							lineStyle: {
@@ -101,72 +102,72 @@ window.onload = function() {
 						},
 					},
 					series: [{
-							name: '网易',
-							type: 'line',
-							smooth: true,
-							itemStyle: {
-								color: '#FF1C1C',
-							},
-							data: wyData
+						name: '网易',
+						type: 'line',
+						smooth: true,
+						itemStyle: {
+							color: '#FF1C1C',
 						},
-						{
-							name: '头条',
-							type: 'line',
-							smooth: true,
-							itemStyle: {
-								color: '#D96729',
-							},
-							data: ttData
+						data: wyData
+					},
+					{
+						name: '头条',
+						type: 'line',
+						smooth: true,
+						itemStyle: {
+							color: '#D96729',
 						},
-						{
-							name: '腾讯',
-							type: 'line',
-							smooth: true,
-							itemStyle: {
-								color: '#BE55E1',
-							},
-							data: txData
+						data: ttData
+					},
+					{
+						name: '腾讯',
+						type: 'line',
+						smooth: true,
+						itemStyle: {
+							color: '#BE55E1',
 						},
-						{
-							name: '新浪',
-							type: 'line',
-							smooth: true,
-							itemStyle: {
-								color: '#159FFF',
-							},
-							data: xlData
+						data: txData
+					},
+					{
+						name: '新浪',
+						type: 'line',
+						smooth: true,
+						itemStyle: {
+							color: '#159FFF',
 						},
-						{
-							name: '搜狐',
-							type: 'line',
-							smooth: true,
-							itemStyle: {
-								color: '#36B77F',
-							},
-							data: shData
+						data: xlData
+					},
+					{
+						name: '搜狐',
+						type: 'line',
+						smooth: true,
+						itemStyle: {
+							color: '#36B77F',
 						},
-						{
-							name: '凤凰网',
-							type: 'line',
-							smooth: true,
-							itemStyle: {
-								color: '#FAAD14',
-							},
-							data: fhwData
+						data: shData
+					},
+					{
+						name: '凤凰网',
+						type: 'line',
+						smooth: true,
+						itemStyle: {
+							color: '#FAAD14',
 						},
-						{
-							name: '警戒线',
-							type: 'line',
-							smooth: true,
-							itemStyle: {
-								normal: {
-									lineStyle: {
-										type: 'dotted' //'dotted'虚线 'solid'实线
-									}
+						data: fhwData
+					},
+					{
+						name: '警戒线',
+						type: 'line',
+						smooth: true,
+						itemStyle: {
+							normal: {
+								lineStyle: {
+									type: 'dotted' //'dotted'虚线 'solid'实线
 								}
-							},
-							data: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
-						}
+							}
+						},
+						data: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+					}
 
 					]
 

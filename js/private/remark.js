@@ -3,13 +3,13 @@ window.onload = function() {
 		el: '#remark',
 		data: {
 			/* 华为发布 */
-			publishDataUrl: "",
+			publishDataUrl: "/categoryMaintenance/get?categoryId=",
 			/* 近期热点 */
-			hotListUrl: "",
+			hotListUrl: "/categoryHotWord/get?categoryId=",
 			/* 近期行业热词 */
-			wordListUrl: "",
+			wordListUrl: "/categoryIndustryHotWord/get?categoryId=",
 			/* 本周亮点文章 */
-			articleUrl: "",
+			articleUrl: "/categoryArticle/get?categoryId=",
 			/* 本周亮点文章列表 */
 			articleList: [{
 				"author": "作者",
@@ -44,6 +44,7 @@ window.onload = function() {
 
 		},
 		mounted: function() {
+			this.FnPublishData()
 			this.FnHotList()
 			this.FnWordList()
 			this.FnArticleList()
@@ -55,53 +56,53 @@ window.onload = function() {
 			},
 			FnPublishData: function() {
 				var that = this
-				var publishDataUrl = domainUrl + this.publishDataUrl
-				// getMessage(publishDataUrl).then(function(){
-				// 	if(res.code == 0){
-				// 	  that.publishData = res.data
-				// 	}else{
-				// 		alert(res.message)
-				// 	}
-				// })
+				var publishDataUrl = domainUrl + this.publishDataUrl + getQuery("cid")
+				getMessage(publishDataUrl).then(function(res){
+					if(res.code == 200){
+					  that.publishData = res.data
+					}else{
+						alert(res.message)
+					}
+				})
 			},
 			/* 近期热点 */
 			FnHotList: function() {
 				var that = this
-				var hotListUrl = domainUrl + this.hotListUrl
-				// getMessage(hotListUrl).then(function(){
-				// 	if(res.code == 0){
-				// 	  that.hotList = res.data
-				//    that.FnHotSwiper()
-				// 	}else{
-				// 		alert(res.message)
-				// 	}
-				// })
+				var hotListUrl = domainUrl + this.hotListUrl + getQuery("cid")
+				getMessage(hotListUrl).then(function(res){
+					if(res.code == 200){
+					  that.hotList = res.data
+				   that.FnHotSwiper()
+					}else{
+						alert(res.message)
+					}
+				})
 			},
 			/* 近期行业热词 */
 			FnWordList: function() {
 				var that = this
-				var wordListUrl = domainUrl + this.wordListUrl
-				// getMessage(wordListUrl).then(function(){
-				// 	if(res.code == 0){
-				// 	  that.wordList = res.data
-				//    that.FnWordSwiper()
-				// 	}else{
-				// 		alert(res.message)
-				// 	}
-				// })
+				var wordListUrl = domainUrl + this.wordListUrl + getQuery("cid")
+				getMessage(wordListUrl).then(function(res){
+					if(res.code == 200){
+					  that.wordList = res.data
+				   that.FnWordSwiper()
+					}else{
+						alert(res.message)
+					}
+				})
 			},
 			/* 本周亮点文章 */
 			FnArticleList: function() {
 				var that = this
-				var articleUrl = domainUrl + this.articleUrl
-				// getMessage(articleUrl).then(function(){
-				// 	if(res.code == 0){
-				// 	  that.articleList = res.data
-				//    that.FnArticleSwiper()
-				// 	}else{
-				// 		alert(res.message)
-				// 	}
-				// })
+				var articleUrl = domainUrl + this.articleUrl + getQuery("cid")
+				getMessage(articleUrl).then(function(res){
+					if(res.code == 200){
+					  that.articleList = res.data
+				   that.FnArticleSwiper()
+					}else{
+						alert(res.message)
+					}
+				})
 			},
 			FnHotSwiper: function() {
 				this.hotSwiper = new Swiper(".mySwiper", {
@@ -124,7 +125,7 @@ window.onload = function() {
 					direction: "vertical",
 					slidesPerView: 5,
 					autoplay: true,
-					loop: true
+					//loop: true
 				});
 			},
 		}

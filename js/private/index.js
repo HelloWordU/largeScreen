@@ -4,6 +4,7 @@ window.onload = function () {
 		data: {
 			projectUrl: "/project/get",
 			categoryUrl: "/category/get",
+			logOutUrl: "/index/loginOut",
 			list: []
 		},
 
