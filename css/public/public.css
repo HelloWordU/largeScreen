@@ -42,4 +42,5 @@ button,
 textarea {
 	outline: none;
 }
+.right_btn span:hover{color: #6FD0FF;}
 [v-cloak]{display: none !important;}

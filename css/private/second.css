@@ -30,7 +30,7 @@
 .el-input__inner{width: 220px;background: transparent;border: none;color: #FFFFFF;line-height: 62px;height: 62px;
 font-size: 22px;font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;font-weight: bold;padding: 0;}
 .pic_title{display: flex;align-items: center;justify-content: flex-end;}
-.pic_title p{width: 220px;font-size: 22px;font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;font-weight: bold;color: #FFFFFF;margin-right: 75px;line-height: 62px;}
+.pic_title p{text-align: center;width: 220px;font-size: 22px;font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;font-weight: bold;color: #FFFFFF;margin-right: 75px;line-height: 62px;}
 .pic_div>img{display: block;width: 480px;height: 270px;margin: 30px 49px 0 44px;}
 .pic_title span{margin-right: 12px;display: flex;align-items: center;font-size: 16px;font-family: PingFangSC-Regular, PingFang SC;font-weight: 400;color: #FFFFFF;cursor: pointer;width: 92px;justify-content: flex-end;}
 .pic_title span img{margin-left: 5px;}

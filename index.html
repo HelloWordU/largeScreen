@@ -27,8 +27,8 @@
 				<div id="showcase1" class="noselect">
 					<div class="trans" v-for="(item,index) in list" :key="index" @click="FnHref(item)"></div>
 				</div>
-				<span id="left" @click="FnTabClick"></span>
-				<span id="right" @click="FnTabClick"></span>
+				<span id="left" @click="FnTabClick" v-show="list && list.length && list.length>1"></span>
+				<span id="right" @click="FnTabClick" v-show="list && list.length && list.length>1"></span>
 				<p class="p_bjt1"></p>
 				<p class="p_bjt2"></p>
 				<p class="p_bjt3"></p>

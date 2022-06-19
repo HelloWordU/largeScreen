@@ -21,9 +21,10 @@
 					<div class="pic_list">
 						<div  v-for="(item,index) in picList" class="pic_div">
 							<div class="pic_title">
-								<el-input v-if="!item.editFlag" v-model="item.title" placeholder="请输入标题" maxLength="10"></el-input>
-								<p v-if="item.editFlag">{{item.title}}</p>
-								<span @click="FnFlag(item)">{{item.label}}<img :src="item.icon" ></span>
+								<el-input v-if="item.editFlag == 2" v-model="item.title" placeholder="请输入标题" maxLength="10"></el-input>
+								<p v-if="item.editFlag == 1">{{item.title}}</p>
+								<span @click="FnFlagTrue(item)" v-if="item.editFlag == 2">{{item.label}}<img :src="item.icon" ></span>
+								<span @click="FnFlag(item)" v-if="item.editFlag == 1">{{item.label}}<img :src="item.icon" ></span>
 							</div>
 							<img :src="item.src" @click="FnLink(item.linkUrl)" >
 						</div>

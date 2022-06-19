@@ -11,32 +11,26 @@ window.onload = function() {
 			/* 本周亮点文章 */
 			articleUrl: "/categoryArticle/get?categoryId=",
 			/* 本周亮点文章列表 */
-			articleList: [{
-				"author": "作者",
-				"source": "来源",
-				"readNum": "9999",
-				"interactionNum": "12213",
-				"title": "(HUAWEI Mate X2)搜狐手机"
-			}],
+			articleList: [],
 			/* 近期行业热词 */
 			wordList: [{
-				"title": "(HUAWEI Mate X2)新浪手机新闻客户端(HUAWEI Mate X2)"
+
 			}],
 			/*近期热点列表 */
 			hotList: [{
-				"title": "(HUAWEI Mate X2)新浪手机新闻客户端(HUAWEI Mate X2)"
+
 			}],
 			hotSwiper: null,
 			wordSwiper: null,
 			articleSwiper: null,
 			/* 华为发布 */
 			publishData: {
-				write: 90000,
-				haveRrite: 90000,
-				publish: 90000,
-				havepublish: 90000,
-				read: 90000,
-				haveRead: 90000,
+				write: 0,
+				haveRrite: 0,
+				publish: 0,
+				havepublish: 0,
+				read: 0,
+				haveRead: 0,
 			}
 		},
 
@@ -57,10 +51,10 @@ window.onload = function() {
 			FnPublishData: function() {
 				var that = this
 				var publishDataUrl = domainUrl + this.publishDataUrl + getQuery("cid")
-				getMessage(publishDataUrl).then(function(res){
-					if(res.code == 200){
-					  that.publishData = res.data
-					}else{
+				getMessage(publishDataUrl).then(function(res) {
+					if (res.code == 200) {
+						that.publishData = res.data
+					} else {
 						alert(res.message)
 					}
 				})
@@ -69,11 +63,16 @@ window.onload = function() {
 			FnHotList: function() {
 				var that = this
 				var hotListUrl = domainUrl + this.hotListUrl + getQuery("cid")
-				getMessage(hotListUrl).then(function(res){
-					if(res.code == 200){
-					  that.hotList = res.data
-				   that.FnHotSwiper()
-					}else{
+				getMessage(hotListUrl).then(function(res) {
+					if (res.code == 200) {
+						that.hotList = res.data
+						if (that.hotList.length > 5) {
+							that.$nextTick(function() {
+								that.FnHotSwiper()
+							})
+						}
+
+					} else {
 						alert(res.message)
 					}
 				})
@@ -82,11 +81,16 @@ window.onload = function() {
 			FnWordList: function() {
 				var that = this
 				var wordListUrl = domainUrl + this.wordListUrl + getQuery("cid")
-				getMessage(wordListUrl).then(function(res){
-					if(res.code == 200){
-					  that.wordList = res.data
-				   that.FnWordSwiper()
-					}else{
+				getMessage(wordListUrl).then(function(res) {
+					if (res.code == 200) {
+						that.wordList = res.data
+						if (that.wordList.length > 5) {
+							that.$nextTick(function() {
+								that.FnWordSwiper()
+							})
+						}
+
+					} else {
 						alert(res.message)
 					}
 				})
@@ -95,11 +99,16 @@ window.onload = function() {
 			FnArticleList: function() {
 				var that = this
 				var articleUrl = domainUrl + this.articleUrl + getQuery("cid")
-				getMessage(articleUrl).then(function(res){
-					if(res.code == 200){
-					  that.articleList = res.data
-				   that.FnArticleSwiper()
-					}else{
+				getMessage(articleUrl).then(function(res) {
+					if (res.code == 200) {
+						that.articleList = res.data
+						if (that.articleList.length > 5) {
+							that.$nextTick(function() {
+								that.FnArticleSwiper()
+							})
+						}
+
+					} else {
 						alert(res.message)
 					}
 				})
@@ -109,7 +118,8 @@ window.onload = function() {
 					direction: "vertical",
 					slidesPerView: 5,
 					mousewheel: true,
-					//loop:true
+					autoplay: true,
+					loop: true
 				});
 			},
 			FnWordSwiper: function() {
@@ -117,7 +127,8 @@ window.onload = function() {
 					direction: "vertical",
 					slidesPerView: 5,
 					mousewheel: true,
-					//loop:true
+					autoplay: true,
+					loop: true
 				});
 			},
 			FnArticleSwiper: function() {
@@ -125,7 +136,7 @@ window.onload = function() {
 					direction: "vertical",
 					slidesPerView: 5,
 					autoplay: true,
-					//loop: true
+					loop: true
 				});
 			},
 		}

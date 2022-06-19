@@ -1,13 +1,13 @@
-window.onload = function () {
+window.onload = function() {
 	var vm = new Vue({
 		el: '#datashow',
 		data: {
 			echarts: '',
-			reachNum: 10,
+			reachNum: 0,
 			/* 达标 */
 			noReachNum: 0,
 			/* 不达标 */
-			totalNum: 10,
+			totalNum: 0,
 			categoryName: "",
 			/* 详情 */
 			detailUrl: "/monitoringPlantformStatistic/getByCategoryId?categoryId=",
@@ -16,33 +16,24 @@ window.onload = function () {
 			/* 走势图 url */
 			echartsUrl: "/monitoringPlantformStatistic/getPageDataByCategoryId?categoryId=",
 			/* 详情列表 */
-			detailList: [{
-				"label": "自身",
-				"isReach": "达标",
-				"labelType": 1,
-				"title": "(HUAWEI Mate X2)搜狐手机"
-			}],
+			detailList: [],
 			value: 1,
 			options: [{
 				label: "网易新闻客户端搜索",
 				value: 1
 			}],
 			keyWord: "",
-			timeData: ["6月12号", "6月12号", "6月12号", "6月12号", "6月12号", "6月12号", "6月12号"],
-			searchList: [{
-				"linkUrl": "https://www.ithome.com/0/623/001.html",
-				"url": "https://www.ithome.com/0/623/001.html",
-				"title": "华为 Mate Xs 2、P50 Pocket、Mate X2 折叠屏包揽 5 月份中国市场销量前三，已自建“超级材料实验室”！"
-			}],
+			timeData: [],
+			searchList: [],
 			mySwiper: null,
 			searchSwiper: null,
 			searchText: "网易新闻客户端搜索"
 		},
 
-		created: function () {
+		created: function() {
 
 		},
-		mounted: function () {
+		mounted: function() {
 			this.FnEchartsList();
 			this.FnDetail()
 			this.FnSearchList()
@@ -54,14 +45,14 @@ window.onload = function () {
 			// 	var plantUrl = domainUrl + this.echartsUrl
 			// },
 			/* 返回主页 */
-			FnReturn: function () {
+			FnReturn: function() {
 				location.href = "./index.html"
 			},
 			/* 走势图 */
-			FnEchartsList: function () {
+			FnEchartsList: function() {
 				var that = this
 				var echartsUrl = domainUrl + this.echartsUrl + getQuery("cid")
-				getMessage(echartsUrl).then(function (res) {
+				getMessage(echartsUrl).then(function(res) {
 					if (res.code == 200) {
 
 						that.options = [];
@@ -83,7 +74,7 @@ window.onload = function () {
 					}
 				})
 			},
-			FnEcharts: function (zsData, jpData, hyData, dbData) {
+			FnEcharts: function(zsData, jpData, hyData, dbData) {
 				this.echarts = echarts.init(document.getElementById("lineChart"));
 				var option = {
 					tooltip: {
@@ -135,41 +126,41 @@ window.onload = function () {
 						},
 					},
 					series: [{
-						name: '自身',
-						type: 'line',
-						smooth: true,
-						itemStyle: {
-							color: '#FF1C1C',
+							name: '自身',
+							type: 'line',
+							smooth: true,
+							itemStyle: {
+								color: '#FF1C1C',
+							},
+							data: zsData
 						},
-						data: zsData
-					},
-					{
-						name: '精品',
-						type: 'line',
-						smooth: true,
-						itemStyle: {
-							color: '#D96729',
+						{
+							name: '精品',
+							type: 'line',
+							smooth: true,
+							itemStyle: {
+								color: '#D96729',
+							},
+							data: jpData
 						},
-						data: jpData
-					},
-					{
-						name: '行业',
-						type: 'line',
-						smooth: true,
-						itemStyle: {
-							color: '#BE55E1',
+						{
+							name: '行业',
+							type: 'line',
+							smooth: true,
+							itemStyle: {
+								color: '#BE55E1',
+							},
+							data: hyData
 						},
-						data: hyData
-					},
-					{
-						name: '自身竞品对比',
-						type: 'line',
-						smooth: true,
-						itemStyle: {
-							color: '#159FFF',
-						},
-						data: dbData
-					}
+						{
+							name: '自身竞品对比',
+							type: 'line',
+							smooth: true,
+							itemStyle: {
+								color: '#159FFF',
+							},
+							data: dbData
+						}
 
 					]
 
@@ -178,10 +169,10 @@ window.onload = function () {
 				this.echarts.setOption(option)
 			},
 			/* 详情 */
-			FnDetail: function () {
+			FnDetail: function() {
 				var that = this
 				var detailUrl = domainUrl + this.detailUrl + getQuery("cid")
-				getMessage(detailUrl).then(function (res) {
+				getMessage(detailUrl).then(function(res) {
 					if (res.code == 200) {
 						that.detailList = []
 						res.data.forEach(item => {
@@ -192,23 +183,25 @@ window.onload = function () {
 								"title": "(" + item.categoryName + ")" + item.plantformName + "(" + item.categoryName + ")"
 							})
 						})
-						that.FnSwiper()
+						that.$nextTick(function() {
+							that.FnSwiper()
+						})
 					} else {
 						alert(res.message)
 					}
 				})
 			},
-			FnSearch: function () {
+			FnSearch: function() {
 				var that = this
 				this.FnSearchList()
 			},
-			FnSearchList: function () {/* 搜索 */
+			FnSearchList: function() { /* 搜索 */
 				var that = this
 				var searchListUrl = domainUrl + this.searchListUrl
 				postMessage(searchListUrl, {
 					optionValue: that.value,
 					keyWord: that.keyWord
-				}).then(function (res) {
+				}).then(function(res) {
 					if (res.code == 200) {
 						that.searchList = [];
 						res.data.forEach(item => {
@@ -218,14 +211,15 @@ window.onload = function () {
 								"title": item.title
 							});
 						})
-
-						that.FnSearchSwiper()
+						that.$nextTick(function() {
+							that.FnSearchSwiper()
+						})
 					} else {
 						alert(res.message)
 					}
 				})
 			},
-			FnSwiper: function () {
+			FnSwiper: function() {
 				this.mySwiper = null
 				this.mySwiper = new Swiper(".mySwiper", {
 					direction: "vertical",
@@ -234,7 +228,7 @@ window.onload = function () {
 					slidesPerView: 5
 				})
 			},
-			FnSearchSwiper: function () {
+			FnSearchSwiper: function() {
 				this.searchSwiper = null
 				this.searchSwiper = new Swiper(".searchSwiper", {
 					direction: "vertical",

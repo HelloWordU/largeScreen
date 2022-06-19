@@ -4,7 +4,7 @@
 .tit_text{font-size: 58px;font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;font-weight: bold;color: #FFFFFF;margin-top: -138px;}
 .right_btn{position: absolute;right: 250px;top: -35px;}
 .right_btn span{font-size: 24px;font-family: MicrosoftYaHei;color: #FFFFFF;margin-right: 30px;cursor: pointer;}
-.right_btn .deploy{color: #6FD0FF;}
+
 
 
 .content{width:1576px;position: relative;height: 69%;display: flex;justify-content: flex-end;flex-direction: column;}

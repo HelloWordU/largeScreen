@@ -1,4 +1,4 @@
-window.onload = function () {
+window.onload = function() {
 	var vm = new Vue({
 		el: '#index',
 		data: {
@@ -8,10 +8,10 @@ window.onload = function () {
 			list: []
 		},
 
-		created: function () {
+		created: function() {
 
 		},
-		mounted: function () {
+		mounted: function() {
 			this.FnProject()
 			//this.FnCategory()
 		},
@@ -27,7 +27,7 @@ window.onload = function () {
 			/* 退出 */
 			FnLogOut() {
 				var logOutUrl = domainUrl + this.logOutUrl
-				getMessage(logOutUrl).then(function (res) {
+				getMessage(logOutUrl).then(function(res) {
 					if (res.code == 200) {
 						location.href = "./login.html"
 					} else {
@@ -35,10 +35,10 @@ window.onload = function () {
 					}
 				})
 			},
-			FnProject: function () {
+			FnProject: function() {
 				var that = this;
 				var projectUrl = domainUrl + this.projectUrl
-				getMessage(projectUrl).then(function (res) {
+				getMessage(projectUrl).then(function(res) {
 					if (res.code == 200) {
 						if (res.data != null) {
 
@@ -54,23 +54,31 @@ window.onload = function () {
 					}
 				})
 			},
-			FnCategory: function (projectId) {
+			FnCategory: function(projectId) {
 				var that = this;
 				var categoryUrl = domainUrl + this.categoryUrl + "?projectId=" + projectId;
-				getMessage(categoryUrl).then(function (res) {
+				getMessage(categoryUrl).then(function(res) {
 					if (res.code == 200) {
 						that.list = res.data;
+						that.$nextTick(function() {
+							if (that.list && that.list.length && that.list.length > 1) {
+								that.FnTransRote(1)
+							} else {
+								that.FnTransRote(0)
+							}
+						})
 					} else {
 						alert(res.message)
 					}
 				})
+			},
+			FnTransRote: function(autoplay) {
 				var showcase = $("#showcase")
 				var showcase1 = $("#showcase1")
-
 				showcase.Cloud9Carousel({
 					yPos: 40,
 					yRadius: 80,
-					autoPlay: 1,
+					autoPlay: autoplay,
 					mirrorOptions: {
 						gap: 10,
 						height: 0.2
@@ -79,10 +87,10 @@ window.onload = function () {
 					buttonLeft: $("#left"),
 					buttonRight: $("#right"),
 					bringToFront: true,
-					onLoaded: function () {
+					onLoaded: function() {
 						showcase.css('visibility', 'visible')
 						showcase.css('display', 'none')
-						setTimeout(function () {
+						setTimeout(function() {
 							showcase.css('display', 'block')
 						}, 500)
 					}
@@ -90,7 +98,7 @@ window.onload = function () {
 				showcase1.Cloud9Carousel({
 					yPos: 40,
 					yRadius: 100,
-					autoPlay: 1,
+					autoPlay: autoplay,
 					mirrorOptions: {
 						gap: 10,
 						height: 0.2
@@ -99,22 +107,21 @@ window.onload = function () {
 					buttonLeft: $("#left"),
 					buttonRight: $("#right"),
 					bringToFront: true,
-					onLoaded: function () {
+					onLoaded: function() {
 						showcase1.css('visibility', 'visible')
 						showcase1.css('display', 'none')
-						setTimeout(function () {
+						setTimeout(function() {
 							showcase1.css('display', 'block')
 						}, 500)
 					}
 				})
-
 			},
-			FnHref: function (item) {
-				location.href = "/second.html?cid=" + item.id;
+			FnHref: function(item) {
+				location.href = "./second.html?cid=" + item.id;
 			},
-			FnTabClick: function (e) {
+			FnTabClick: function(e) {
 				var b = $(e.target).addClass('down')
-				setTimeout(function () {
+				setTimeout(function() {
 					b.removeClass('down')
 				}, 80)
 			}
