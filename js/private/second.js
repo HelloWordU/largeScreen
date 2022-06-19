@@ -92,16 +92,16 @@ window.onload = function () {
 			/* 获取列表 */
 			FnList: function () {
 				var that = this
-				var listUrl = domainUrl + this.listUrl + getQuery("id");
+				var listUrl = domainUrl + this.listUrl + getQuery("cid");
 				getMessage(listUrl).then(function (res) {
 					if (res.code == 200) {
 						that.picList = [];
 						res.data.forEach(item => {
-							var linkUrlData = "/datashow.html";//核心数据daping 
+							var linkUrlData = "/datashow.html?cid="+ getQuery("cid");//核心数据daping 
 							if (item.type == 2) {
-								linkUrlData = "/negative.html";//全网舆情数据大屏
+								linkUrlData = "/negative.html?cid="+ getQuery("cid");//全网舆情数据大屏
 							} else if (item.type == 3) {
-								linkUrlData = "/remark.html";//整个分发数据大屏
+								linkUrlData = "/remark.html?cid="+ getQuery("cid");//整个分发数据大屏
 							}
 							that.picList.push({
 								title: item.name,

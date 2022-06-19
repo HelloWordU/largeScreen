@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
 	var vm = new Vue({
 		el: '#datashow',
 		data: {
@@ -8,12 +8,13 @@ window.onload = function() {
 			noReachNum: 0,
 			/* 不达标 */
 			totalNum: 10,
+			categoryName: "",
 			/* 详情 */
-			detailUrl: "",
+			detailUrl: "/monitoringPlantformStatistic/getByCategoryId?categoryId=",
 			/* 搜索 url */
-			searchListUrl: "",
+			searchListUrl: "/monitoringPlantformArticle/getByPlantformIdAndKey",
 			/* 走势图 url */
-			echartsUrl: "",
+			echartsUrl: "/monitoringPlantformStatistic/getPageDataByCategoryId?categoryId=",
 			/* 详情列表 */
 			detailList: [{
 				"label": "自身",
@@ -38,34 +39,51 @@ window.onload = function() {
 			searchText: "网易新闻客户端搜索"
 		},
 
-		created: function() {
+		created: function () {
 
 		},
-		mounted: function() {
+		mounted: function () {
+			this.FnEchartsList();
 			this.FnDetail()
 			this.FnSearchList()
+
 		},
 		methods: {
+			// // 查询监控平台
+			// FnPlantQuery:function(){
+			// 	var plantUrl = domainUrl + this.echartsUrl
+			// },
 			/* 返回主页 */
-			FnReturn: function() {
+			FnReturn: function () {
 				location.href = "./index.html"
 			},
 			/* 走势图 */
-			FnEchartsList: function() {
+			FnEchartsList: function () {
 				var that = this
-				var echartsUrl = domainUrl + this.echartsUrl
-				/* getMessage(echartsUrl).then(function(){
-					if(res.code == 0){
+				var echartsUrl = domainUrl + this.echartsUrl + getQuery("cid")
+				getMessage(echartsUrl).then(function (res) {
+					if (res.code == 200) {
+
+						that.options = [];
+						res.data.plantformData.forEach(item => {
+							that.options.push({
+								label: item.name,
+								value: item.id
+							});
+						});
+						that.timeData = res.data.timeData
 						that.reachNum = res.data.reachNum
 						that.noReachNum = res.data.noReachNum
 						that.totalNum = res.data.totalNum
-					  that.FnEcharts(res.data.zsData,res.data.jpData,res.data.hyData,res.data.dbData)
-					}else{
+						that.categoryName = res.data.categoryName;
+						that.keyWord = res.data.categoryName;
+						that.FnEcharts(res.data.zsData, res.data.jpData, res.data.hyData, res.data.dbData)
+					} else {
 						alert(res.message)
 					}
-				}) */
+				})
 			},
-			FnEcharts: function(zsData, jpData, hyData, dbData) {
+			FnEcharts: function (zsData, jpData, hyData, dbData) {
 				this.echarts = echarts.init(document.getElementById("lineChart"));
 				var option = {
 					tooltip: {
@@ -117,41 +135,41 @@ window.onload = function() {
 						},
 					},
 					series: [{
-							name: '自身',
-							type: 'line',
-							smooth: true,
-							itemStyle: {
-								color: '#FF1C1C',
-							},
-							data: zsData
+						name: '自身',
+						type: 'line',
+						smooth: true,
+						itemStyle: {
+							color: '#FF1C1C',
 						},
-						{
-							name: '精品',
-							type: 'line',
-							smooth: true,
-							itemStyle: {
-								color: '#D96729',
-							},
-							data: jpData
+						data: zsData
+					},
+					{
+						name: '精品',
+						type: 'line',
+						smooth: true,
+						itemStyle: {
+							color: '#D96729',
 						},
-						{
-							name: '行业',
-							type: 'line',
-							smooth: true,
-							itemStyle: {
-								color: '#BE55E1',
-							},
-							data: hyData
+						data: jpData
+					},
+					{
+						name: '行业',
+						type: 'line',
+						smooth: true,
+						itemStyle: {
+							color: '#BE55E1',
 						},
-						{
-							name: '自身竞品对比',
-							type: 'line',
-							smooth: true,
-							itemStyle: {
-								color: '#159FFF',
-							},
-							data: dbData
-						}
+						data: hyData
+					},
+					{
+						name: '自身竞品对比',
+						type: 'line',
+						smooth: true,
+						itemStyle: {
+							color: '#159FFF',
+						},
+						data: dbData
+					}
 
 					]
 
@@ -160,38 +178,54 @@ window.onload = function() {
 				this.echarts.setOption(option)
 			},
 			/* 详情 */
-			FnDetail: function() {
+			FnDetail: function () {
 				var that = this
-				var detailUrl = domainUrl + this.detailUrl
-				// getMessage(detailUrl).then(function(){
-				// 	if(res.code == 0){
-				// 	  that.detailList = res.data
-				//    that.FnSwiper()
-				// 	}else{
-				// 		alert(res.message)
-				// 	}
-				// })
+				var detailUrl = domainUrl + this.detailUrl + getQuery("cid")
+				getMessage(detailUrl).then(function (res) {
+					if (res.code == 200) {
+						that.detailList = []
+						res.data.forEach(item => {
+							that.detailList.push({
+								"label": "自身",
+								"isReach": "达标",
+								"labelType": 1,
+								"title": "(" + item.categoryName + ")" + item.plantformName + "(" + item.categoryName + ")"
+							})
+						})
+						that.FnSwiper()
+					} else {
+						alert(res.message)
+					}
+				})
 			},
-			FnSearch: function() { 
+			FnSearch: function () {
 				var that = this
 				this.FnSearchList()
 			},
-			FnSearchList: function() {/* 搜索 */
+			FnSearchList: function () {/* 搜索 */
 				var that = this
 				var searchListUrl = domainUrl + this.searchListUrl
-				/* postMessage(searchListUrl,{
-					optionValue:that.value,
-					keyWord:that.keyWord
-				}).then(function(res){
-					if(res.code == 0){
-						that.searchList = res.data
+				postMessage(searchListUrl, {
+					optionValue: that.value,
+					keyWord: that.keyWord
+				}).then(function (res) {
+					if (res.code == 200) {
+						that.searchList = [];
+						res.data.forEach(item => {
+							that.searchList.push({
+								"linkUrl": item.url,
+								"url": item.url,
+								"title": item.title
+							});
+						})
+
 						that.FnSearchSwiper()
-					}else{
+					} else {
 						alert(res.message)
 					}
-				}) */
+				})
 			},
-			FnSwiper: function() {
+			FnSwiper: function () {
 				this.mySwiper = null
 				this.mySwiper = new Swiper(".mySwiper", {
 					direction: "vertical",
@@ -200,7 +234,7 @@ window.onload = function() {
 					slidesPerView: 5
 				})
 			},
-			FnSearchSwiper: function() {
+			FnSearchSwiper: function () {
 				this.searchSwiper = null
 				this.searchSwiper = new Swiper(".searchSwiper", {
 					direction: "vertical",

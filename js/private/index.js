@@ -109,7 +109,7 @@ window.onload = function () {
 
 			},
 			FnHref: function (item) {
-				location.href = "/second.html?id="+item.id;
+				location.href = "/second.html?cid="+item.id;
 			},
 			FnTabClick: function (e) {
 				var b = $(e.target).addClass('down')
