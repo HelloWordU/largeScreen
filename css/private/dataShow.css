@@ -74,3 +74,5 @@
 
 .search_main>span{width: 400px;height: 42px;background: #014F98;border: 1px solid #48A6C4;text-align: center;line-height: 42px;font-size: 20px;font-family: MicrosoftYaHei;color: #FFFFFF;margin-left: 25px;}
 .swiper-slide:hover{background: rgba(1, 79, 152, 0.4);}
+
+.selected{background: rgba(1, 79, 152, 0.4);}

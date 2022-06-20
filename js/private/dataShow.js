@@ -17,26 +17,26 @@ window.onload = function() {
 			echartsUrl: "/monitoringPlantformStatistic/getPageDataByCategoryId?categoryId=",
 			/* 详情列表 */
 			detailList: [],
-			value: 1,
-			options: [{
-				label: "网易新闻客户端搜索",
-				value: 1
-			}],
 			keyWord: "",
 			timeData: [],
 			searchList: [],
 			mySwiper: null,
 			searchSwiper: null,
-			searchText: "网易新闻客户端搜索"
+			searchText: "网易新闻客户端搜索",
+			changeFlag:false,
+			keyWordEdit:''
 		},
-
+		watch:{
+			searchText:function(val){
+				this.changeFlag = false
+			}
+		},
 		created: function() {
 
 		},
 		mounted: function() {
 			this.FnEchartsList();
 			this.FnDetail()
-			this.FnSearchList()
 
 		},
 		methods: {
@@ -175,16 +175,25 @@ window.onload = function() {
 				getMessage(detailUrl).then(function(res) {
 					if (res.code == 200) {
 						that.detailList = []
+						var isReach = ''
 						res.data.forEach(item => {
+							if(item.isReachingStandard){
+								 isReach = '达标'
+							}else{
+								isReach = '不达标'
+							}
 							that.detailList.push({
 								"label": "自身",
-								"isReach": "达标",
+								"isReach": isReach,
 								"labelType": 1,
+								"id":item.id,
 								"title": "(" + item.categoryName + ")" + item.plantformName + "(" + item.categoryName + ")"
 							})
 						})
+						that.FnSearchList(that.detailList[0].id)
 						that.$nextTick(function() {
 							that.FnSwiper()
+							that.FnSetTime()
 						})
 					} else {
 						alert(res.message)
@@ -192,15 +201,32 @@ window.onload = function() {
 				})
 			},
 			FnSearch: function() {
-				var that = this
+				this.changeFlag = true
+				this.keyWordEdit = this.keyWord
 				this.FnSearchList()
 			},
-			FnSearchList: function() { /* 搜索 */
+			FnSetTime:function(){
+				var that = this
+				var num = 1
+				$('.detail_list').eq(0).addClass('selected')
+				setInterval(function(){
+					that.FnSearchList(that.detailList[num].id)
+					if(num < that.detailList.length){
+						$('.detail_list').eq(num).addClass('selected').siblings().removeClass('selected')
+						num++
+						if(num == that.detailList.length){
+							num = 0
+						}
+					}
+				},50000)
+			},
+			FnSearchList: function(id) { /* 搜索 */
 				var that = this
 				var searchListUrl = domainUrl + this.searchListUrl
+				keyWord = this.changeFlag ? this.keyWordEdit : ''
 				postMessage(searchListUrl, {
-					optionValue: that.value,
-					keyWord: that.keyWord
+					searchText: keyWord,
+					id: id
 				}).then(function(res) {
 					if (res.code == 200) {
 						that.searchList = [];
