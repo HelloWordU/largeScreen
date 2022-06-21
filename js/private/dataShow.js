@@ -225,8 +225,8 @@ window.onload = function() {
 				var searchListUrl = domainUrl + this.searchListUrl
 				keyWord = this.changeFlag ? this.keyWordEdit : ''
 				postMessage(searchListUrl, {
-					searchText: keyWord,
-					id: id
+					keyWord: keyWord,
+					optionValue: id
 				}).then(function(res) {
 					if (res.code == 200) {
 						that.searchList = [];
