@@ -22,12 +22,12 @@ window.onload = function() {
 			searchList: [],
 			mySwiper: null,
 			searchSwiper: null,
-			searchText: "网易新闻客户端搜索",
+			searchText: "",
 			changeFlag:false,
 			keyWordEdit:''
 		},
 		watch:{
-			searchText:function(val){
+			keyWord:function(val){
 				this.changeFlag = false
 			}
 		},
@@ -187,10 +187,12 @@ window.onload = function() {
 								"isReach": isReach,
 								"labelType": 1,
 								"id":item.id,
-								"title": "(" + item.categoryName + ")" + item.plantformName + "(" + item.categoryName + ")"
+								"title": "(" + item.categoryName + ")" + item.plantformName + "(" + item.categoryName + ")",
+                "plantformName": item.plantformName
 							})
 						})
 						that.FnSearchList(that.detailList[0].id)
+            that.searchText = that.detailList[0].plantformName
 						that.$nextTick(function() {
 							that.FnSwiper()
 							that.FnSetTime()
@@ -213,12 +215,13 @@ window.onload = function() {
 					that.FnSearchList(that.detailList[num].id)
 					if(num < that.detailList.length){
 						$('.detail_list').eq(num).addClass('selected').siblings().removeClass('selected')
+            that.searchText = that.detailList[num].plantformName
 						num++
 						if(num == that.detailList.length){
 							num = 0
 						}
 					}
-				},50000)
+				},1000)
 			},
 			FnSearchList: function(id) { /* 搜索 */
 				var that = this
