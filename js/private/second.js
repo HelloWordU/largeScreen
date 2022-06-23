@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
 	var vm = new Vue({
 		el: '#second',
 		data: {
@@ -13,21 +13,24 @@ window.onload = function() {
 			saveUrl: "/categoryScreenConfig/save",
 			/* 保存大屏配置路径 */
 			queryCategoryUrl: "/category/get",
-			num: 0
+			categoryUrl:"/category/getById",
+			num: 0,
+			categoryName: "",
 		},
 
-		created: function() {
+		created: function () {
 
 		},
-		mounted: function() {
+		mounted: function () {
 			this.FnList()
 			this.FnUser()
+			this.FnCategory()
 		},
 		methods: {
 			/* 退出 */
-			FnLogOut: function() {
+			FnLogOut: function () {
 				var logOutUrl = domainUrl + this.logOutUrl
-				getMessage(logOutUrl).then(function(res) {
+				getMessage(logOutUrl).then(function (res) {
 					if (res.code == 200) {
 						location.href = "./login.html"
 					} else {
@@ -36,12 +39,12 @@ window.onload = function() {
 				})
 			},
 			/* 修改标题保存接口 */
-			FnFlag: function(val) {
+			FnFlag: function (val) {
 				val.editFlag = 2
 				val.label = "确定"
 				val.icon = "img/second/finsh.png"
 			},
-			FnFlagTrue: function(val) {
+			FnFlagTrue: function (val) {
 				var that = this
 				var saveUrl = domainUrl + this.saveUrl
 				postMessage(saveUrl, {
@@ -50,7 +53,7 @@ window.onload = function() {
 					name: val.title,
 					type: val.type
 
-				}, "application/json").then(function(res) {
+				}, "application/json").then(function (res) {
 					if (res.code == 200) {
 						that.FnList()
 					} else {
@@ -59,10 +62,10 @@ window.onload = function() {
 				})
 			},
 			/* 获取列表 */
-			FnList: function() {
+			FnList: function () {
 				var that = this
 				var listUrl = domainUrl + this.listUrl + getQuery("cid");
-				getMessage(listUrl).then(function(res) {
+				getMessage(listUrl).then(function (res) {
 					if (res.code == 200) {
 						that.picList = [];
 						res.data.forEach(item => {
@@ -89,21 +92,32 @@ window.onload = function() {
 					}
 				})
 			},
-			FnLink: function(link) {
+			FnLink: function (link) {
 				location.href = link
 			},
 			/* 获取当前用户 */
-			FnUser: function() {
+			FnUser: function () {
 				var that = this
 				var useUrl = domainUrl + this.useUrl
-				getMessage(useUrl).then(function(res) {
+				getMessage(useUrl).then(function (res) {
 					if (res.code == 200) {
 						that.userName = res.data
 					} else {
 						alert(res.message)
 					}
 				})
-			}
+			},
+			FnCategory: function () {
+				var that = this;
+				var categoryUrl = domainUrl + this.categoryUrl + "?categoryId=" + getQuery("cid");
+				getMessage(categoryUrl).then(function (res) {
+					if (res.code == 200) {
+						that.categoryName = res.name;
+					} else {
+						alert(res.message)
+					}
+				})
+			},
 		}
 
 	})
