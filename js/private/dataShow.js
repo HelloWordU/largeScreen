@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
 	var vm = new Vue({
 		el: '#datashow',
 		data: {
@@ -9,6 +9,7 @@ window.onload = function() {
 			/* 不达标 */
 			totalNum: 0,
 			categoryName: "",
+			listUrl: "/categoryScreenConfig/get?categoryId=",
 			/* 详情 */
 			detailUrl: "/monitoringPlantformStatistic/getByCategoryId?categoryId=",
 			/* 搜索 url */
@@ -23,18 +24,19 @@ window.onload = function() {
 			mySwiper: null,
 			searchSwiper: null,
 			searchText: "",
-			changeFlag:false,
-			keyWordEdit:''
+			changeFlag: false,
+			keyWordEdit: '',
+			pageTitle: '',
 		},
-		watch:{
-			keyWord:function(val){
+		watch: {
+			keyWord: function (val) {
 				this.changeFlag = false
 			}
 		},
-		created: function() {
+		created: function () {
 
 		},
-		mounted: function() {
+		mounted: function () {
 			this.FnEchartsList();
 			this.FnDetail()
 
@@ -45,14 +47,14 @@ window.onload = function() {
 			// 	var plantUrl = domainUrl + this.echartsUrl
 			// },
 			/* 返回主页 */
-			FnReturn: function() {
+			FnReturn: function () {
 				location.href = "./index.html"
 			},
 			/* 走势图 */
-			FnEchartsList: function() {
+			FnEchartsList: function () {
 				var that = this
 				var echartsUrl = domainUrl + this.echartsUrl + getQuery("cid")
-				getMessage(echartsUrl).then(function(res) {
+				getMessage(echartsUrl).then(function (res) {
 					if (res.code == 200) {
 
 						that.options = [];
@@ -74,7 +76,7 @@ window.onload = function() {
 					}
 				})
 			},
-			FnEcharts: function(zsData, jpData, hyData, dbData) {
+			FnEcharts: function (zsData, jpData, hyData, dbData) {
 				this.echarts = echarts.init(document.getElementById("lineChart"));
 				var option = {
 					tooltip: {
@@ -126,41 +128,41 @@ window.onload = function() {
 						},
 					},
 					series: [{
-							name: '自身',
-							type: 'line',
-							smooth: true,
-							itemStyle: {
-								color: '#FF1C1C',
-							},
-							data: zsData
+						name: '自身',
+						type: 'line',
+						smooth: true,
+						itemStyle: {
+							color: '#FF1C1C',
 						},
-						{
-							name: '精品',
-							type: 'line',
-							smooth: true,
-							itemStyle: {
-								color: '#D96729',
-							},
-							data: jpData
+						data: zsData
+					},
+					{
+						name: '精品',
+						type: 'line',
+						smooth: true,
+						itemStyle: {
+							color: '#D96729',
 						},
-						{
-							name: '行业',
-							type: 'line',
-							smooth: true,
-							itemStyle: {
-								color: '#BE55E1',
-							},
-							data: hyData
+						data: jpData
+					},
+					{
+						name: '行业',
+						type: 'line',
+						smooth: true,
+						itemStyle: {
+							color: '#BE55E1',
 						},
-						{
-							name: '自身竞品对比',
-							type: 'line',
-							smooth: true,
-							itemStyle: {
-								color: '#159FFF',
-							},
-							data: dbData
-						}
+						data: hyData
+					},
+					{
+						name: '自身竞品对比',
+						type: 'line',
+						smooth: true,
+						itemStyle: {
+							color: '#159FFF',
+						},
+						data: dbData
+					}
 
 					]
 
@@ -168,32 +170,67 @@ window.onload = function() {
 				};
 				this.echarts.setOption(option)
 			},
+			/* 获取列表 */
+			FnList: function () {
+				var that = this
+				var listUrl = domainUrl + this.listUrl + getQuery("cid");
+				getMessage(listUrl).then(function (res) {
+					if (res.code == 200) {
+						res.data.forEach(item => {
+							if(item.type == 1)
+							{
+								$('title').text(item.name);
+								that.pageTitle = item.name;
+							}
+							// var linkUrlData = "./datashow.html?cid=" + getQuery("cid"); //核心数据daping 
+							// if (item.type == 2) {
+							// 	linkUrlData = "./negative.html?cid=" + getQuery("cid"); //全网舆情数据大屏
+							// } else if (item.type == 3) {
+							// 	linkUrlData = "./remark.html?cid=" + getQuery("cid"); //整个分发数据大屏
+							// }
+							// that.picList.push({
+							// 	title: item.name,
+							// 	label: "修改标题",
+							// 	editFlag: 1,
+							// 	linkUrl: linkUrlData,
+							// 	icon: "img/second/edit.png",
+							// 	src: "img/second/screen" + item.type + ".jpg",
+							// 	id: item.id,
+							// 	type: item.type,
+							// 	categoryId: item.categoryId
+							// });
+						});
+					} else {
+						alert(res.message)
+					}
+				})
+			},
 			/* 详情 */
-			FnDetail: function() {
+			FnDetail: function () {
 				var that = this
 				var detailUrl = domainUrl + this.detailUrl + getQuery("cid")
-				getMessage(detailUrl).then(function(res) {
+				getMessage(detailUrl).then(function (res) {
 					if (res.code == 200) {
 						that.detailList = []
 						var isReach = ''
 						res.data.forEach(item => {
-							if(item.isReachingStandard){
-								 isReach = '达标'
-							}else{
+							if (item.isReachingStandard) {
+								isReach = '达标'
+							} else {
 								isReach = '不达标'
 							}
 							that.detailList.push({
 								"label": "自身",
 								"isReach": isReach,
 								"labelType": 1,
-								"id":item.id,
+								"id": item.id,
 								"title": "(" + item.categoryName + ")" + item.plantformName + "(" + item.categoryName + ")",
-                "plantformName": item.plantformName
+								"plantformName": item.plantformName
 							})
 						})
 						that.FnSearchList(that.detailList[0].id)
-            that.searchText = that.detailList[0].plantformName
-						that.$nextTick(function() {
+						that.searchText = that.detailList[0].plantformName
+						that.$nextTick(function () {
 							that.FnSwiper()
 							that.FnSetTime()
 						})
@@ -202,35 +239,35 @@ window.onload = function() {
 					}
 				})
 			},
-			FnSearch: function() {
+			FnSearch: function () {
 				this.changeFlag = true
 				this.keyWordEdit = this.keyWord
 				this.FnSearchList()
 			},
-			FnSetTime:function(){
+			FnSetTime: function () {
 				var that = this
 				var num = 1
 				$('.detail_list').eq(0).addClass('selected')
-				setInterval(function(){
+				setInterval(function () {
 					that.FnSearchList(that.detailList[num].id)
-					if(num < that.detailList.length){
+					if (num < that.detailList.length) {
 						$('.detail_list').eq(num).addClass('selected').siblings().removeClass('selected')
-            that.searchText = that.detailList[num].plantformName
+						that.searchText = that.detailList[num].plantformName
 						num++
-						if(num == that.detailList.length){
+						if (num == that.detailList.length) {
 							num = 0
 						}
 					}
-				},1000)
+				}, 1000)
 			},
-			FnSearchList: function(id) { /* 搜索 */
+			FnSearchList: function (id) { /* 搜索 */
 				var that = this
 				var searchListUrl = domainUrl + this.searchListUrl
 				keyWord = this.changeFlag ? this.keyWordEdit : ''
 				postMessage(searchListUrl, {
 					keyWord: keyWord,
 					optionValue: id
-				}).then(function(res) {
+				}).then(function (res) {
 					if (res.code == 200) {
 						that.searchList = [];
 						res.data.forEach(item => {
@@ -240,7 +277,7 @@ window.onload = function() {
 								"title": item.title
 							});
 						})
-						that.$nextTick(function() {
+						that.$nextTick(function () {
 							that.FnSearchSwiper()
 						})
 					} else {
@@ -248,7 +285,7 @@ window.onload = function() {
 					}
 				})
 			},
-			FnSwiper: function() {
+			FnSwiper: function () {
 				this.mySwiper = null
 				this.mySwiper = new Swiper(".mySwiper", {
 					direction: "vertical",
@@ -257,7 +294,7 @@ window.onload = function() {
 					slidesPerView: 5
 				})
 			},
-			FnSearchSwiper: function() {
+			FnSearchSwiper: function () {
 				this.searchSwiper = null
 				this.searchSwiper = new Swiper(".searchSwiper", {
 					direction: "vertical",

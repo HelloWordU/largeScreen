@@ -112,7 +112,7 @@ window.onload = function () {
 				var categoryUrl = domainUrl + this.categoryUrl + "?categoryId=" + getQuery("cid");
 				getMessage(categoryUrl).then(function (res) {
 					if (res.code == 200) {
-						that.categoryName = res.name;
+						that.categoryName = res.data.name;
 					} else {
 						alert(res.message)
 					}
