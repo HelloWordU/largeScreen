@@ -138,18 +138,14 @@ window.onload = function() {
 				this.hotSwiper = new Swiper(".mySwiper", {
 					direction: "vertical",
 					slidesPerView: 5,
-					mousewheel: true,
-					autoplay: true,
-					loop: true
+					mousewheel: true
 				});
 			},
 			FnWordSwiper: function() {
 				this.wordSwiper = new Swiper(".wordSwiper", {
 					direction: "vertical",
 					slidesPerView: 5,
-					mousewheel: true,
-					autoplay: true,
-					loop: true
+					mousewheel: true
 				});
 			},
 			FnArticleSwiper: function() {

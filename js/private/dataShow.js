@@ -39,6 +39,7 @@ window.onload = function () {
 		mounted: function () {
 			this.FnEchartsList();
 			this.FnDetail()
+			this.FnList();
 
 		},
 		methods: {
