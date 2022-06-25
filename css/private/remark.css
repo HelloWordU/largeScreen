@@ -1,4 +1,4 @@
-#remark{position: absolute;top: 0;width: 1920px;height: 1080px;left: 50%;margin-left: -960px;-webkit-transform-origin: 50% 0%;-ms-transform-origin: 50% 0%;transform-origin: 50% 0%;overflow: hidden;background: url(../../img/remark/bjt.png) no-repeat center center;}
+#remark{position: absolute;top: 0;width: 1920px;height: 1080px;left: 50%;margin-left: -960px;-webkit-transform-origin: 50% 0%;-ms-transform-origin: 50% 0%;transform-origin: 50% 0%;overflow: hidden;background: url(../../img/remark/bjt.jpg) no-repeat center center;}
 .title{width: 1916px;height: 70px;display: flex;justify-content: center;align-items: center;background: url(../../img/negative/title.png) no-repeat center center;margin-top: 90px;position: relative;}
 .title_add{margin-top: 65px;}
 
@@ -31,8 +31,8 @@
 
 .traffic_pub .swiper{padding: 8px 29px;}
 .traffic_pub .swiper-wrapper{height: 300px;}
-.traffic_pub .swiper-slide{display: flex;align-items: center;width: 964px;height: 60px;position: relative;}
-.traffic_pub .swiper-slide img{display: block;width: 32px;height: 32px;margin-right: 20px;margin-left: 3px;}
+.traffic_pub .swiper-slide{display: flex;align-items: center;width: 964px;height: 60px;position: relative;padding-left: 10px;}
+.traffic_pub .swiper-slide img{display: block;width: 32px;height: 32px;margin-right: 20px;}
 .traffic_pub .swiper-slide .outline{width: 964px;height: 2px;position: absolute;bottom: 0;left: 0;margin: 0;}
 .traffic_pub .swiper-slide .outline1{width: 337px;}
 .traffic_pub .swiper-slide i{width: 30px;height: 30px;border: 1px solid #2773E6;margin-right: 20px;text-align: center;line-height: 30px;font-size: 16px;font-family: MicrosoftYaHei;color: #2773E6;border-radius: 30px;}

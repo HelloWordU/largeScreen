@@ -92,6 +92,7 @@ window.onload = function () {
 						type: 'category',
 						boundaryGap: false,
 						data: this.timeData,
+            axisTick: { alignWithLabel: true },
 						axisLine: { //x轴线的颜色以及宽度
 							show: true,
 							lineStyle: {
@@ -107,6 +108,7 @@ window.onload = function () {
 								fontWeight: "bold"
 							}
 						},
+            boundaryGap: true, 
 					},
 					yAxis: {
 						type: 'value',
@@ -119,6 +121,14 @@ window.onload = function () {
 								type: "solid"
 							}
 						},
+            splitLine:{
+              show: true,
+              lineStyle: {
+              	color: "#044B98",
+              	width: 1,
+              	type: "solid"
+              }
+            },
 						axisLabel: {
 							textStyle: {
 								color: "#ffffff",
@@ -182,6 +192,23 @@ window.onload = function () {
 								$('title').text(item.name);
 								that.pageTitle = item.name;
 							}
+							// var linkUrlData = "./datashow.html?cid=" + getQuery("cid"); //核心数据daping 
+							// if (item.type == 2) {
+							// 	linkUrlData = "./negative.html?cid=" + getQuery("cid"); //全网舆情数据大屏
+							// } else if (item.type == 3) {
+							// 	linkUrlData = "./remark.html?cid=" + getQuery("cid"); //整个分发数据大屏
+							// }
+							// that.picList.push({
+							// 	title: item.name,
+							// 	label: "修改标题",
+							// 	editFlag: 1,
+							// 	linkUrl: linkUrlData,
+							// 	icon: "img/second/edit.png",
+							// 	src: "img/second/screen" + item.type + ".jpg",
+							// 	id: item.id,
+							// 	type: item.type,
+							// 	categoryId: item.categoryId
+							// });
 						});
 					} else {
 						alert(res.message)
@@ -241,7 +268,7 @@ window.onload = function () {
 							num = 0
 						}
 					}
-				}, 1000)
+				}, 20000)
 			},
 			FnSearchList: function (id) { /* 搜索 */
 				var that = this
@@ -272,13 +299,16 @@ window.onload = function () {
 				this.mySwiper = null
 				this.mySwiper = new Swiper(".mySwiper", {
 					direction: "vertical",
-					autoplay: true,
+					autoplay: 20000,
 					//loop: true, //数据需要循环就放开
 					slidesPerView: 5
 				})
 			},
 			FnSearchSwiper: function () {
-				this.searchSwiper = null
+				if(this.searchSwiper){
+				  this.searchSwiper.destroy(false)
+				  this.searchSwiper = null
+				}
 				this.searchSwiper = new Swiper(".searchSwiper", {
 					direction: "vertical",
 					autoplay: true,
