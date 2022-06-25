@@ -83,23 +83,45 @@ window.onload = function () {
 						axisLine: { //x轴线的颜色以及宽度
 							show: true,
 							lineStyle: {
-								color: "#ffffff",
-								width: 1,
-								type: "solid"
-							}
-						}
-					},
-					yAxis: {
-						type: 'value',
-
-						axisLine: {
-							show: true,
-							lineStyle: {
-								color: "#ffffff",
+								color: "#044B98",
 								width: 1,
 								type: "solid"
 							}
 						},
+            axisLabel: {
+            	textStyle: {
+            		color: "#8EC7DC",
+            		fontSize: 16,
+            		fontWeight: "bold"
+            	}
+            },
+            boundaryGap: true
+					},
+					yAxis: {
+						type: 'value',
+            axisLabel: {
+            	textStyle: {
+            		color: "#ffffff",
+            		fontSize: 14,
+            		fontWeight: "normal"
+            	}
+            },
+            axisLine: {
+            	show: true,
+            	lineStyle: {
+            		color: "#044B98",
+            		width: 1,
+            		type: "solid"
+            	}
+            },
+            splitLine:{
+              show: true,
+              lineStyle: {
+              	color: "#044B98",
+              	width: 1,
+              	type: "solid"
+              }
+            },
 					},
 					series: [{
 						name: '网易',

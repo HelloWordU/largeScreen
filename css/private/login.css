@@ -1,4 +1,4 @@
-#login{position: absolute;top: 0;width: 1920px;height: 1080px;left: 50%;margin-left: -960px;-webkit-transform-origin: 50% 0%;-ms-transform-origin: 50% 0%;transform-origin: 50% 0%;overflow: hidden;background: url(../../img/login/loginbjt.png) no-repeat center center;display: flex;flex-direction: column;align-items: center;justify-content: space-between;background-size: 100% 100%;}
+#login{position: absolute;top: 0;width: 1920px;height: 1080px;left: 50%;margin-left: -960px;-webkit-transform-origin: 50% 0%;-ms-transform-origin: 50% 0%;transform-origin: 50% 0%;overflow: hidden;background: url(../../img/login/loginbjt.jpg) no-repeat center center;display: flex;flex-direction: column;align-items: center;justify-content: space-between;background-size: 100% 100%;}
 .title{width: 1853px;height: 50px;display: flex;justify-content: center;align-items: center;background: url(../../img/login/top2.png) no-repeat center center;margin-top: 70px;position: relative;}
 .tops{display: block;width: 759px;height: 20px;position: absolute;bottom: -3px;left: 50%;margin-left: -379px;}
 .logo{display: block;width: 150px;height: 52px;margin-top: -42px;}

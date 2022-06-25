@@ -1,4 +1,4 @@
-#datashow{position: absolute;top: 0;width: 1920px;height: 1080px;left: 50%;margin-left: -960px;-webkit-transform-origin: 50% 0%;-ms-transform-origin: 50% 0%;transform-origin: 50% 0%;overflow: hidden;background: url(../../img/dataShow/bjt.png) no-repeat center center;}
+#datashow{position: absolute;top: 0;width: 1920px;height: 1080px;left: 50%;margin-left: -960px;-webkit-transform-origin: 50% 0%;-ms-transform-origin: 50% 0%;transform-origin: 50% 0%;overflow: hidden;background: url(../../img/dataShow/bjt.jpg) no-repeat center center;}
 .title{width: 1916px;height: 70px;display: flex;justify-content: center;align-items: center;background: url(../../img/negative/title.png) no-repeat center center;margin-top: 90px;position: relative;}
 .title_add{margin-top: 65px;}
 
@@ -31,7 +31,7 @@
 
 .traffic_pub .swiper-wrapper{width: 100%;height: 300px;}
 .traffic_pub .mySwiper{padding: 0 29px;margin-top: 5px;}
-.traffic_pub .detail_list{display: flex;align-items: center;width: 855px;height: 60px;position: relative;}
+.traffic_pub .detail_list{display: flex;align-items: center;width: 855px;height: 60px;position: relative;padding-left: 10px;}
 .traffic_pub .detail_list:nth-child(3){margin-bottom: 5px;}
 .traffic_pub .detail_list:hover{background: rgba(1, 79, 152, 0.4);}
 .detail_label{display: block;width: 54px;height: 30px;background: rgba(255, 28, 28, 0.4);border-radius: 8px;border: 1px solid #FF1C1C;line-height: 30px;text-align: center;font-size: 16px;font-family: MicrosoftYaHei;color: #FFFFFF;}
@@ -63,7 +63,7 @@
 .link_text{display: block;width: 1700px;font-size: 20px;font-family: MicrosoftYaHei;color: #FFFFFF;margin-top: 8px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 
 .el-select .el-input__icon{margin: 0;}
-#lineChart{height: 200px;margin-left: -10px;width: 920px;}
+#lineChart{height: 240px;margin-left: -5px;width: 920px;margin-top: -30px;}
 .bot_img{display: block;width: 1846px;height: 60px;margin-top: 30px;margin-bottom: 14px;}
 
 .icon_list .yuan{width: 14px;height: 14px;display: block;border-radius: 14px;}

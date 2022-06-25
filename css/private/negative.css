@@ -1,4 +1,4 @@
-#negative{position: absolute;top: 0;width: 1920px;height: 1080px;left: 50%;margin-left: -960px;-webkit-transform-origin: 50% 0%;-ms-transform-origin: 50% 0%;transform-origin: 50% 0%;overflow: hidden;background: url(../../img/negative/bjt.png) no-repeat center center;}
+#negative{position: absolute;top: 0;width: 1920px;height: 1080px;left: 50%;margin-left: -960px;-webkit-transform-origin: 50% 0%;-ms-transform-origin: 50% 0%;transform-origin: 50% 0%;overflow: hidden;background: url(../../img/negative/bjt.jpg) no-repeat center center;}
 .title{width: 1916px;height: 70px;display: flex;justify-content: center;align-items: center;background: url(../../img/negative/title.png) no-repeat center center;margin-top: 90px;position: relative;}
 .title_add{margin-top: 65px;}
 .tit_text{font-size: 48px;font-family: PingFangSC-Regular, PingFang SC;font-weight: 400;color: #FFFFFF;margin-top: -110px;}
@@ -23,7 +23,7 @@
 .traffic_con{display: flex;align-items: center;width: 1777px;padding-left: 27px;margin-top: 25px;}
 .time_line{width: 1777px;height: 25px;background: url(../../img/negative/line.png) no-repeat; position: absolute;bottom: 34px;
 left: 27px;}
-.traffic_con div{display: flex;flex-direction: column;align-items: center;width: 71px;}
+.traffic_con div{display: flex;flex-direction: column;align-items: center;width: 75px;}
 .traffic_con img{display: block;width: 37px;height: 110px;}
 .traffic_con i{display: block;margin-top: 17px;font-size: 16px;font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;font-weight: bold;color: #8EC7DC;}
 #lineChart{width: 1920px;height: 280px;margin-left: -40px;margin-top: -20px;}

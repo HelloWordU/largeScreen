@@ -107,6 +107,7 @@ window.onload = function () {
 								fontWeight: "bold"
 							}
 						},
+            boundaryGap: true, 
 					},
 					yAxis: {
 						type: 'value',
@@ -119,6 +120,14 @@ window.onload = function () {
 								type: "solid"
 							}
 						},
+            splitLine:{
+              show: true,
+              lineStyle: {
+              	color: "#044B98",
+              	width: 1,
+              	type: "solid"
+              }
+            },
 						axisLabel: {
 							textStyle: {
 								color: "#ffffff",
@@ -258,7 +267,7 @@ window.onload = function () {
 							num = 0
 						}
 					}
-				}, 1000)
+				}, 20000)
 			},
 			FnSearchList: function (id) { /* 搜索 */
 				var that = this
@@ -295,7 +304,10 @@ window.onload = function () {
 				})
 			},
 			FnSearchSwiper: function () {
-				this.searchSwiper = null
+				if(this.searchSwiper){
+				  this.searchSwiper.destroy(false)
+				  this.searchSwiper = null
+				}
 				this.searchSwiper = new Swiper(".searchSwiper", {
 					direction: "vertical",
 					autoplay: true,

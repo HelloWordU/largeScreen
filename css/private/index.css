@@ -1,4 +1,4 @@
-#index{position: absolute;top: 0;width: 1920px;height: 1080px;left: 50%;margin-left: -960px;-webkit-transform-origin: 50% 0%;-ms-transform-origin: 50% 0%;transform-origin: 50% 0%;overflow: hidden;background: url(../../img/index/indexbjt.png) no-repeat center center;display: flex;flex-direction: column;align-items: center;}
+#index{position: absolute;top: 0;width: 1920px;height: 1080px;left: 50%;margin-left: -960px;-webkit-transform-origin: 50% 0%;-ms-transform-origin: 50% 0%;transform-origin: 50% 0%;overflow: hidden;background: url(../../img/index/indexbjt.jpg) no-repeat center center;display: flex;flex-direction: column;align-items: center;}
 .title{width: 1916px;height: 70px;display: flex;justify-content: center;align-items: center;background: url(../../img/index/title.png) no-repeat center center;position: relative;margin-top: 130px;}
 .title_top{margin-top: 130px;}
 .tit_text{font-size: 58px;font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;font-weight: bold;color: #FFFFFF;margin-top: -138px;}
@@ -8,9 +8,9 @@
 
 
 .content{width:1576px;position: relative;height: 69%;display: flex;justify-content: flex-end;flex-direction: column;}
-.p_bjt1{width: 1576px;height: 249px;background: url(../../img/index/bjt1.png) no-repeat;position: absolute;bottom: 30px;left: 0;}
-.p_bjt2{width: 1576px;height: 86px;background: url(../../img/index/bjt2.png) no-repeat;position: absolute;bottom: 279px;left: 0;}
-.p_bjt3{width: 750px;height: 86px;background: url(../../img/index/bjt3.png) no-repeat;position: absolute;bottom: 279px;left: 50%;margin-left: -375px;z-index: 99;}
+.p_bjt1{width: 1576px;height: 235px;background: url(../../img/index/bjt1.png) no-repeat;position: absolute;bottom: 30px;left: 0;}
+.p_bjt2{width: 1242px;height: 101px;background: url(../../img/index/bjt2.png) no-repeat;position: absolute;bottom: 265px;left: 50%;margin-left: -623px;}
+.p_bjt3{width: 1000px;height: 65px;background: url(../../img/index/bjt3.png) no-repeat;position: absolute;bottom: 301px;left: 50%;margin-left: -502px;z-index: 99;}
 .textbjt{width: 685px;height: 465px;background: url(../../img/index/textbjt.png) no-repeat;position: absolute;top: 20px;left: 50%;margin-left: -342px;font-size: 38px;font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;font-weight: bold;color: #FFFFFF;text-align: center;line-height: 465px;z-index: 100;}
 
 .noselect {

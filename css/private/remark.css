@@ -1,4 +1,4 @@
-#remark{position: absolute;top: 0;width: 1920px;height: 1080px;left: 50%;margin-left: -960px;-webkit-transform-origin: 50% 0%;-ms-transform-origin: 50% 0%;transform-origin: 50% 0%;overflow: hidden;background: url(../../img/remark/bjt.png) no-repeat center center;}
+#remark{position: absolute;top: 0;width: 1920px;height: 1080px;left: 50%;margin-left: -960px;-webkit-transform-origin: 50% 0%;-ms-transform-origin: 50% 0%;transform-origin: 50% 0%;overflow: hidden;background: url(../../img/remark/bjt.jpg) no-repeat center center;}
 .title{width: 1916px;height: 70px;display: flex;justify-content: center;align-items: center;background: url(../../img/negative/title.png) no-repeat center center;margin-top: 90px;position: relative;}
 .title_add{margin-top: 65px;}
 
