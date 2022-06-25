@@ -182,23 +182,6 @@ window.onload = function () {
 								$('title').text(item.name);
 								that.pageTitle = item.name;
 							}
-							// var linkUrlData = "./datashow.html?cid=" + getQuery("cid"); //核心数据daping 
-							// if (item.type == 2) {
-							// 	linkUrlData = "./negative.html?cid=" + getQuery("cid"); //全网舆情数据大屏
-							// } else if (item.type == 3) {
-							// 	linkUrlData = "./remark.html?cid=" + getQuery("cid"); //整个分发数据大屏
-							// }
-							// that.picList.push({
-							// 	title: item.name,
-							// 	label: "修改标题",
-							// 	editFlag: 1,
-							// 	linkUrl: linkUrlData,
-							// 	icon: "img/second/edit.png",
-							// 	src: "img/second/screen" + item.type + ".jpg",
-							// 	id: item.id,
-							// 	type: item.type,
-							// 	categoryId: item.categoryId
-							// });
 						});
 					} else {
 						alert(res.message)

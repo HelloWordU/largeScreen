@@ -2,6 +2,7 @@ window.onload = function() {
 	var vm = new Vue({
 		el: '#remark',
 		data: {
+			listUrl: "/categoryScreenConfig/get?categoryId=",
 			/* 华为发布 */
 			publishDataUrl: "/categoryMaintenance/get?categoryId=",
 			/* 近期热点 */
@@ -20,6 +21,7 @@ window.onload = function() {
 			hotList: [{
 
 			}],
+			pageTitle: '',
 			hotSwiper: null,
 			wordSwiper: null,
 			articleSwiper: null,
@@ -42,6 +44,7 @@ window.onload = function() {
 			this.FnHotList()
 			this.FnWordList()
 			this.FnArticleList()
+			this.FnList()
 		},
 		methods: {
 			/* 返回主页 */
@@ -108,6 +111,24 @@ window.onload = function() {
 							})
 						}
 
+					} else {
+						alert(res.message)
+					}
+				})
+			},
+			/* 获取列表 */
+			FnList: function () {
+				var that = this
+				var listUrl = domainUrl + this.listUrl + getQuery("cid");
+				getMessage(listUrl).then(function (res) {
+					if (res.code == 200) {
+						res.data.forEach(item => {
+							if(item.type == 2)
+							{
+								$('title').text(item.name);
+								that.pageTitle = item.name;
+							}
+						});
 					} else {
 						alert(res.message)
 					}
