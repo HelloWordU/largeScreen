@@ -42,5 +42,7 @@ button,
 textarea {
 	outline: none;
 }
-.right_btn span:hover{color: #6FD0FF;}
+.right_btnpub{position: absolute;right: 50%;margin-right: -35%;top: -35px;width: 70%;display: flex;justify-content: space-between;}
+.right_btnpub span,.right_btnpub a{font-size: 24px;font-family: MicrosoftYaHei;color: #FFFFFF;cursor: pointer;margin-right: 0;}
+.right_btn span:hover,.right_btnpub a:hover{color: #6FD0FF;}
 [v-cloak]{display: none !important;}
