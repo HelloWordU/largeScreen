@@ -48,7 +48,6 @@ window.onload = function () {
 							captchaToken: getCookie("captchaAccessToken"),
 						}, "application/json").then(function (res) {
 							if (res.code == 200) {
-								alert("登录成功");
 								setCookie("accessToken", res.data);
 								location.href = "./index.html"
 							} else {

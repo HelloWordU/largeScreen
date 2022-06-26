@@ -3,13 +3,15 @@ window.onload = function () {
 		el: '#negative',
 		data: {
 			echarts: '',
+			pageTitle: '',
 			/* 全网列表 */
 			surveyList: [{ "value": 1, "key": "00时" }, { "value": 0, "key": "01时" }, { "value": -1, "key": "02时" }],
 			/* 五大列表 */
 			headlineList: [{ "value": 1, "key": "00时" }, { "value": 0, "key": "01时" }, { "value": -1, "key": "02时" }],
 			surveyUrl: "/negativeRate/getAll?categoryId=",/* 全网 url */
 			headlineUrl: "/negativeRate/getGateWay?categoryId=",/* 五大 url */
-			echartsUrl: "/negativeRate/getGateWayRate?categoryId="/* 走势图 url */
+			echartsUrl: "/negativeRate/getGateWayRate?categoryId=",/* 走势图 url */
+			listUrl: "/categoryScreenConfig/get?categoryId=",
 		},
 
 		created: function () {
@@ -19,6 +21,7 @@ window.onload = function () {
 			this.FnSurveyList()
 			this.FnHeadlineList()
 			this.FnEchartsList()
+			this.FnList()
 		},
 		methods: {
 			/* 返回主页 */
@@ -55,16 +58,33 @@ window.onload = function () {
 				var echartsUrl = domainUrl + this.echartsUrl + getQuery("cid")
 				getMessage(echartsUrl).then(function (res) {
 					if (res.code == 200) {
-						that.FnEcharts(res.data.wyData, 
+						that.FnEcharts(res.data.wyData,
 							res.data.ttData, res.data.txData,
-							 res.data.xlData, res.data.shData, 
-							 res.data.fhwData,res.data.timeData)
+							res.data.xlData, res.data.shData,
+							res.data.fhwData, res.data.timeData)
 					} else {
 						alert(res.message)
 					}
 				})
 			},
-			FnEcharts: function (wyData, ttData, txData, xlData, shData, fhwData,timeData) {
+			/* 获取列表 */
+			FnList: function () {
+				var that = this
+				var listUrl = domainUrl + this.listUrl + getQuery("cid");
+				getMessage(listUrl).then(function (res) {
+					if (res.code == 200) {
+						res.data.forEach(item => {
+							if (item.type == 2) {
+								$('title').text(item.name);
+								that.pageTitle = item.name;
+							}
+						});
+					} else {
+						alert(res.message)
+					}
+				})
+			},
+			FnEcharts: function (wyData, ttData, txData, xlData, shData, fhwData, timeData) {
 				this.echarts = echarts.init(document.getElementById("lineChart"));
 				var option = {
 					tooltip: {
@@ -79,7 +99,7 @@ window.onload = function () {
 					xAxis: {
 						type: 'category',
 						data: timeData,
-            axisTick: { alignWithLabel: true },
+						axisTick: { alignWithLabel: true },
 						axisLine: { //x轴线的颜色以及宽度
 							show: true,
 							lineStyle: {
@@ -88,40 +108,40 @@ window.onload = function () {
 								type: "solid"
 							}
 						},
-            axisLabel: {
-            	textStyle: {
-            		color: "#8EC7DC",
-            		fontSize: 16,
-            		fontWeight: "bold"
-            	}
-            },
-            boundaryGap: true
+						axisLabel: {
+							textStyle: {
+								color: "#8EC7DC",
+								fontSize: 16,
+								fontWeight: "bold"
+							}
+						},
+						boundaryGap: true
 					},
 					yAxis: {
 						type: 'value',
-            axisLabel: {
-            	textStyle: {
-            		color: "#ffffff",
-            		fontSize: 14,
-            		fontWeight: "normal"
-            	}
-            },
-            axisLine: {
-            	show: true,
-            	lineStyle: {
-            		color: "#044B98",
-            		width: 1,
-            		type: "solid"
-            	}
-            },
-            splitLine:{
-              show: true,
-              lineStyle: {
-              	color: "#044B98",
-              	width: 1,
-              	type: "solid"
-              }
-            },
+						axisLabel: {
+							textStyle: {
+								color: "#ffffff",
+								fontSize: 14,
+								fontWeight: "normal"
+							}
+						},
+						axisLine: {
+							show: true,
+							lineStyle: {
+								color: "#044B98",
+								width: 1,
+								type: "solid"
+							}
+						},
+						splitLine: {
+							show: true,
+							lineStyle: {
+								color: "#044B98",
+								width: 1,
+								type: "solid"
+							}
+						},
 					},
 					series: [{
 						name: '网易',

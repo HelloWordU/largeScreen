@@ -123,7 +123,7 @@ window.onload = function() {
 				getMessage(listUrl).then(function (res) {
 					if (res.code == 200) {
 						res.data.forEach(item => {
-							if(item.type == 2)
+							if(item.type == 3)
 							{
 								$('title').text(item.name);
 								that.pageTitle = item.name;
