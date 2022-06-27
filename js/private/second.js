@@ -2,7 +2,7 @@ window.onload = function () {
 	var vm = new Vue({
 		el: '#second',
 		data: {
-			userName: "负责人",
+			userName: "",
 			picList: [],
 			logOutUrl: "/index/loginOut",
 			/* 退出接口路径 */

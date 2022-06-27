@@ -8,7 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="css/public/public.css" />
 	</head>
 	<body>
-		<div id="index" class="index" v-cloak>
+		<div id="index" class="index pub_box" v-cloak>
 			<div class="title">
 				<span class="tit_text">华为项目大屏</span>
 				<div class="right_btn">
@@ -19,13 +19,13 @@
 			</div>
 			<div class="content" id="content">
 				<div id="showcase" class="noselect"> 
-					<div class="img_con" v-for="(item,index) in list" :key="index">
-					    <img class="cloud9-item" src="img/index/radius.png">
-						<div class="carousel-caption">{{item.name}}</div>
+					<div class="item_con" v-for="(item,index) in list" :key="index">
+            <div class="img_con">
+              <img class="cloud9-item" src="img/index/radius.png">
+              <div class="carousel-caption">{{item.name}}</div>
+            </div>
+            <div class="trans"  @click="FnHref(item)"></div>
 					</div>
-				</div>
-				<div id="showcase1" class="noselect">
-					<div class="trans" v-for="(item,index) in list" :key="index" @click="FnHref(item)"></div>
 				</div>
 				<span id="left" @click="FnTabClick" v-show="list && list.length && list.length>1"></span>
 				<span id="right" @click="FnTabClick" v-show="list && list.length && list.length>1"></span>
@@ -34,6 +34,11 @@
 				<p class="p_bjt3"></p>
 				<div class="textbjt">华为项目大屏</div>
 			</div>
+      <div class="bottom_pub">
+        <p>Copyright©2016-2022 瑞智新传ruizhixinzhuan.com 版权所有</p>
+        <p>沪ICP备16053114号-2 ICP证：沪B2-20180032 沪公网安备31011502400137号</p>
+        <img src="img/public/border.png" >
+      </div>
 		</div>
 	</body>
 	<script src="js/public/jquery.min.js" type="text/javascript" charset="utf-8"></script>

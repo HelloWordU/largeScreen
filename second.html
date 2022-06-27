@@ -10,10 +10,13 @@
 	<body>
 		<div id="second" class="second pub_class" v-cloak>
 			<div class="title">
-				<span class="tit_text">华为<span>{{categoryName}}</span>项目大屏</span>
-				<div class="right_btn">
-					<span class="user"><img src="img/second/user.png" ><i>{{userName}}</i></span>
-					<span class="log_out" @click="FnLogOut">退出</span>
+				<span class="tit_text"><span>{{categoryName}}</span>可视大屏</span>
+				<div class="right_btn right_btnpub">
+          <a href="javascript:history.back(-1)" class="return_top">上一页</a>
+          <div>
+            <span class="user"><img src="img/second/user.png" ><i>{{userName}}</i></span>
+            <span class="log_out" @click="FnLogOut">退出</span>
+          </div>
 				</div>
 			</div>
 			<div class="content" id="content">
@@ -31,7 +34,12 @@
 					</div>
 				</div>
 			</div>
-		</div>
+      <div class="bottom_pub">
+        <p>Copyright©2016-2022 瑞智新传ruizhixinzhuan.com 版权所有</p>
+        <p>沪ICP备16053114号-2 ICP证：沪B2-20180032 沪公网安备31011502400137号</p>
+        <img src="img/public/border.png" >
+      </div>
+    </div>
 	</body>
 	<script src="js/public/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/public/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>

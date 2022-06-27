@@ -95,9 +95,7 @@ window.onload = function() {
            xRadius = 880
         }
 				var showcase = $("#showcase")
-				var showcase1 = $("#showcase1")
         showcase.css('visibility', 'hidden')
-        showcase1.css('visibility', 'hidden')
 				showcase.Cloud9Carousel({
 					yPos: 40,
 					yRadius: 100,
@@ -108,30 +106,12 @@ window.onload = function() {
 						gap: 10,
 						height: 0.2
 					},
-					itemClass: "img_con",
+					itemClass: "item_con",
 					buttonLeft: $("#left"),
 					buttonRight: $("#right"),
 					bringToFront: true,
 					onLoaded: function() {
 						showcase.css('visibility', 'visible')
-					}
-				})
-				showcase1.Cloud9Carousel({
-					yPos: 40,
-					yRadius: 100,
-          xRadius:xRadius,
-					autoPlay: autoplay,
-          autoPlayDelay: 4000,
-					mirrorOptions: {
-						gap: 10,
-						height: 0.2
-					},
-					itemClass: "trans",
-					buttonLeft: $("#left"),
-					buttonRight: $("#right"),
-					bringToFront: true,
-					onLoaded: function() {
-						showcase1.css('visibility', 'visible')
 					}
 				})
 			},

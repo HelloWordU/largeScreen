@@ -1,10 +1,10 @@
-#login{position: absolute;top: 0;width: 1920px;height: 1080px;left: 50%;margin-left: -960px;-webkit-transform-origin: 50% 0%;-ms-transform-origin: 50% 0%;transform-origin: 50% 0%;overflow: hidden;background: url(../../img/login/loginbjt.jpg) no-repeat center center;display: flex;flex-direction: column;align-items: center;justify-content: space-between;background-size: 100% 100%;}
+#login{position: absolute;top: 0;width: 1920px;height: 1080px;left: 50%;margin-left: -960px;-webkit-transform-origin: 50% 0%;-ms-transform-origin: 50% 0%;transform-origin: 50% 0%;overflow: hidden;background: url(../../img/login/loginbjt.jpg) no-repeat center center;display: flex;flex-direction: column;align-items: center;background-size: 100% 100%;}
 .title{width: 1853px;height: 50px;display: flex;justify-content: center;align-items: center;background: url(../../img/login/top2.png) no-repeat center center;margin-top: 70px;position: relative;}
 .tops{display: block;width: 759px;height: 20px;position: absolute;bottom: -3px;left: 50%;margin-left: -379px;}
 .logo{display: block;width: 150px;height: 52px;margin-top: -42px;}
 .text{display: block;width: 377px;height: 36px;margin-top: -45px;}
 .title i{display: block;margin: 0 32px;width: 2px;height: 22px;background: #FFFFFF;margin-top: -45px;}
-.content{display: flex;width: 100%;margin-top: 180px;}
+.content{display: flex;width: 100%;margin-top: 280px;}
 .con_left{width: 992px;height: 517px;display: flex;justify-content: center;background: url(../../img/login/dx.png) no-repeat;background-size: cover;margin-right: 125px;margin-left: 70px;animation: bounceInLeft 1s forwards;}
 .con_left img{display: block;width: 571px;height: 376px;animation-name: a4;animation-iteration-count: infinite;animation-duration: 2s;animation-direction: alternate;}
 .con_right{width: 395px;height: 376px;background: rgba(255,255,255,.03);border-radius: 2px;position: relative;display: flex;flex-direction: column;align-items: center;margin-top: 6px;animation: bounceInUp 1s forwards;}
