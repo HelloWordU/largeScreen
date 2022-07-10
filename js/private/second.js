@@ -75,6 +75,9 @@ window.onload = function () {
 							} else if (item.type == 3) {
 								linkUrlData = "./remark.html?cid=" + getQuery("cid"); //整个分发数据大屏
 							}
+							else if (item.type == 4) {
+								linkUrlData = "./comment_negative.html?cid=" + getQuery("cid"); //评论区维护红绿灯预警
+							}
 							that.picList.push({
 								title: item.name,
 								label: "修改标题",

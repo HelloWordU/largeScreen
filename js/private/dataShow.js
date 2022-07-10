@@ -243,7 +243,7 @@ window.onload = function () {
 						that.searchText = that.detailList[0].plantformName
 						that.$nextTick(function () {
 							that.FnSwiper()
-							that.FnSetTime()
+							//that.FnSetTime()
 						})
 					} else {
 						alert(res.message)
@@ -254,22 +254,6 @@ window.onload = function () {
 				this.changeFlag = true
 				this.keyWordEdit = this.keyWord
 				this.FnSearchList()
-			},
-			FnSetTime: function () {
-				var that = this
-				var num = 1
-				$('.detail_list').eq(0).addClass('selected')
-				setInterval(function () {
-					that.FnSearchList(that.detailList[num].id)
-					if (num < that.detailList.length) {
-						$('.detail_list').eq(num).addClass('selected').siblings().removeClass('selected')
-						that.searchText = that.detailList[num].plantformName
-						num++
-						if (num == that.detailList.length) {
-							num = 0
-						}
-					}
-				}, 20000)
 			},
 			FnSearchList: function (id) { /* 搜索 */
 				var that = this
@@ -300,8 +284,11 @@ window.onload = function () {
 				this.mySwiper = null
 				this.mySwiper = new Swiper(".mySwiper", {
 					direction: "vertical",
-					autoplay: 20000,
-					//loop: true, //数据需要循环就放开
+					autoplay: true,
+					speed: 20000,
+					loop: true, //数据需要循环就放开
+					observer: true, //修改swiper自己或子元素时，自动初始化swiper
+					observeParents: true, //修改swiper的父元素时，自动初始化swiper
 					slidesPerView: 5
 				})
 			},
