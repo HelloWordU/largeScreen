@@ -73,8 +73,8 @@ function onResize() {
 onResize();
 
 
-var domainUrl = "http://182.61.26.201:9101"; /* 域名修改*/
-//var domainUrl = "http://127.0.0.1:9101"; 
+//var domainUrl = "http://182.61.26.201:9101"; /* 域名修改*/
+var domainUrl = "http://127.0.0.1:9101"; 
 
 function setCookie(cname,cvalue,exdays)
 {

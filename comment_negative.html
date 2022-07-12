@@ -21,13 +21,15 @@
 			<div class="survey_warp traffic_pub">
 				<div class="title_pub">
 					<span>
-						<span><img src="img/negative/icon_g.png" /><i>正常链接 (49)</i></span>
-						<span><img src="img/negative/icon_r.png" /><i>有负面评论的链接 (2)</i></span>
-						<span><img src="img/negative/icon_y.png" /><i>评论为0的链接 (0)</i></span>
+						<span><img src="img/negative/icon_g.png" /><i>正常链接
+								({{linkSum.normalCount}})</i></span>&nbsp;&nbsp;
+						<span><img src="img/negative/icon_r.png" /><i>有负面评论的链接
+								({{linkSum.negetiveCount}})</i></span>&nbsp;&nbsp;
+						<span><img src="img/negative/icon_y.png" /><i>评论为0的链接 ({{linkSum.noCommentCount}})</i></span>
 					</span>
 				</div>
 				<div class="traffic_con">
-					<div  v-for="item in pageData" class="traffic_con_detail">
+					<div v-for="item in pageData" class="traffic_con_detail">
 						<div style="width: 120px;">
 							<span>{{item.title}}</span>
 						</div>
@@ -38,9 +40,12 @@
 							<div style="background: rgba(1, 79, 152, 0.4); width: 100%;">
 								<span>{{item.showDate}}</span>
 							</div>
-							<div  style="width: 1600px;height: 120px; flex-wrap: wrap;overflow: hidden;">
-								<span  v-for="index in item.normalCount" style=" margin-right: 10px;width: 40px; height: 40px;">
-									<img src="img/negative/green_big.png" />
+							<div style="width: 1600px;height: 120px; flex-wrap: wrap;overflow: hidden;">
+								<span v-for="index in item.comment"
+									style=" margin-right: 10px;width: 40px; height: 40px;">
+									<img v-if="index.isNormal" src="img/negative/green_big.png" />
+									<img v-else-if="index.isNegetive" src="img/negative/red_big.png" />
+									<img v-else-if="index.isNoComment" src="img/negative/yellow_big.png" />
 								</span>
 								<!-- <span v-for="(index in item.normalCount)" style=" margin-right: 10px;width: 40px; height: 40px;">
 									<img src="img/negative/green_big.png" />

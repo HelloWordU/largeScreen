@@ -44,7 +44,9 @@
 						</div>
 						<div class="swiper mySwiper">
 							<div class="swiper-wrapper">
-								<div class="swiper-slide detail_list" v-for="(item,index) in detailList" :key="index">
+								<div class="swiper-slide detail_list"  v-for="(item,index) in detailList" :key="index">
+									<span style="display:none ;" tag="id">{{item.id}}</span>
+									<span style="display:none ;" tag="plantformName">{{item.plantformName}}</span>
 									<span class="detail_label" :class="'label'+item.labelType">{{item.label}}</span>
 									<i class="line"></i>
 									<span class="detail_label1">{{item.isReach}}</span>

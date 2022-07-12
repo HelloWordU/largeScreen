@@ -148,7 +148,7 @@ window.onload = function () {
 						data: zsData
 					},
 					{
-						name: '精品',
+						name: '竞品',
 						type: 'line',
 						smooth: true,
 						itemStyle: {
@@ -281,6 +281,7 @@ window.onload = function () {
 				})
 			},
 			FnSwiper: function () {
+				var that = this
 				this.mySwiper = null
 				this.mySwiper = new Swiper(".mySwiper", {
 					direction: "vertical",
@@ -289,7 +290,15 @@ window.onload = function () {
 					loop: true, //数据需要循环就放开
 					observer: true, //修改swiper自己或子元素时，自动初始化swiper
 					observeParents: true, //修改swiper的父元素时，自动初始化swiper
-					slidesPerView: 5
+					slidesPerView:5,
+					on: {
+						slideChangeTransitionEnd: function(){
+						 //alert(this.activeIndex);//切换结束时，告诉我现在是第几个slide
+						 that.searchText =// $(".mySwiper .swiper-slide-active").find("[tag=plantformName]").html();
+						 //$(".mySwiper .detail_list").eq(this.activeIndex).find("[tag=plantformName]").html();	
+						  $(".mySwiper .detail_list").eq(this.realIndex).find("[tag=plantformName]").html();
+						},
+					  },
 				})
 			},
 			FnSearchSwiper: function () {

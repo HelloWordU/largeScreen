@@ -2,42 +2,46 @@ window.onload = function () {
 	var vm = new Vue({
 		el: '#negative',
 		data: {
-			
 			pageTitle: '评论区维护红绿灯预警',
-			linkSum:{
-				normalCount:0,
-				negetiveCount:0,
-				noCommentCount:0
+			linkSum: {
+				normalCount: 0,
+				negetiveCount: 0,
+				noCommentCount: 0
 			},
-			pageData:[
+			pageData: [
 				{
-				 title:"最近2小时",
-				 showDate:"15:30:14-17:30:14",
-				 normalCount:1000,
-				 negetiveCount:0,
-				 noCommentCount:0
-				},{
-					title:"最近5小时",
-					showDate:"12:30:14-17:30:14",
-					normalCount:10,
-					negetiveCount:0,
-					noCommentCount:0
+					title: "最近2小时",
+					showDate: "15:30:14-17:30:14",
+					normalCount: 1000,
+					negetiveCount: 0,
+					noCommentCount: 0,
+					comment:[]
+				}, {
+					title: "最近5小时",
+					showDate: "12:30:14-17:30:14",
+					normalCount: 10,
+					negetiveCount: 0,
+					noCommentCount: 0,
+					comment:[]
 				},
 				{
-					title:"最近12小时",
-					showDate:"05:30:14-17:30:14",
-					normalCount:20,
-					negetiveCount:0,
-					noCommentCount:0
+					title: "最近12小时",
+					showDate: "05:30:14-17:30:14",
+					normalCount: 20,
+					negetiveCount: 0,
+					noCommentCount: 0,
+					comment:[]
 				},
 				{
-					title:"最近24小时",
-					showDate:"05:30:14-17:30:14",
-					normalCount:30,
-					negetiveCount:0,
-					noCommentCount:0
+					title: "最近24小时",
+					showDate: "05:30:14-17:30:14",
+					normalCount: 30,
+					negetiveCount: 0,
+					noCommentCount: 0,
+					comment:[]
 				}
-			]
+			],
+			commentNegativeConfigUrl: "/commentNegativeConfig/get?categoryId=",
 			// echarts: '',
 			// pageTitle: '',
 			// /* 全网列表 */
@@ -54,7 +58,7 @@ window.onload = function () {
 
 		},
 		mounted: function () {
-			// this.FnSurveyList()
+			this.FnCommentNegativeConfig()
 			// this.FnHeadlineList()
 			// this.FnEchartsList()
 			// this.FnList()
@@ -64,194 +68,127 @@ window.onload = function () {
 			FnReturn: function () {
 				location.href = "./index.html"
 			},
-			/* 全网调查率 */
-			FnSurveyList: function () {
+			/* 评论负面配置 */
+			FnCommentNegativeConfig: function () {
 				var that = this
-				var surveyUrl = domainUrl + this.surveyUrl + getQuery("cid")
+				var surveyUrl = domainUrl + this.commentNegativeConfigUrl + getQuery("cid")
 				getMessage(surveyUrl).then(function (res) {
 					if (res.code == 200) {
-						that.surveyList = res.data
-					} else {
-						alert(res.message)
-					}
-				})
-			},
-			/* 五大门户和头条 */
-			FnHeadlineList: function () {
-				var that = this
-				var headlineUrl = domainUrl + this.headlineUrl + getQuery("cid")
-				getMessage(headlineUrl).then(function (res) {
-					if (res.code == 200) {
-						that.headlineList = res.data
-					} else {
-						alert(res.message)
-					}
-				})
-			},
-			/* 五大门户和头条的负面走势图 */
-			FnEchartsList: function () {
-				var that = this
-				var echartsUrl = domainUrl + this.echartsUrl + getQuery("cid")
-				getMessage(echartsUrl).then(function (res) {
-					if (res.code == 200) {
-						that.FnEcharts(res.data.wyData,
-							res.data.ttData, res.data.txData,
-							res.data.xlData, res.data.shData,
-							res.data.fhwData, res.data.timeData)
-					} else {
-						alert(res.message)
-					}
-				})
-			},
-			/* 获取列表 */
-			FnList: function () {
-				var that = this
-				var listUrl = domainUrl + this.listUrl + getQuery("cid");
-				getMessage(listUrl).then(function (res) {
-					if (res.code == 200) {
-						res.data.forEach(item => {
-							if (item.type == 2) {
-								$('title').text(item.name);
-								that.pageTitle = item.name;
-							}
-						});
-					} else {
-						alert(res.message)
-					}
-				})
-			},
-			FnEcharts: function (wyData, ttData, txData, xlData, shData, fhwData, timeData) {
-				this.echarts = echarts.init(document.getElementById("lineChart"));
-				var option = {
-					tooltip: {
-						trigger: 'axis'
-					},
-					grid: {
-						left: '3%',
-						right: '4%',
-						bottom: '3%',
-						containLabel: true
-					},
-					xAxis: {
-						type: 'category',
-						data: timeData,
-						axisTick: { alignWithLabel: true },
-						axisLine: { //x轴线的颜色以及宽度
-							show: true,
-							lineStyle: {
-								color: "#044B98",
-								width: 1,
-								type: "solid"
-							}
-						},
-						axisLabel: {
-							textStyle: {
-								color: "#8EC7DC",
-								fontSize: 16,
-								fontWeight: "bold"
-							}
-						},
-						boundaryGap: true
-					},
-					yAxis: {
-						type: 'value',
-						axisLabel: {
-							textStyle: {
-								color: "#ffffff",
-								fontSize: 14,
-								fontWeight: "normal"
-							}
-						},
-						axisLine: {
-							show: true,
-							lineStyle: {
-								color: "#044B98",
-								width: 1,
-								type: "solid"
-							}
-						},
-						splitLine: {
-							show: true,
-							lineStyle: {
-								color: "#044B98",
-								width: 1,
-								type: "solid"
-							}
-						},
-					},
-					series: [{
-						name: '网易',
-						type: 'line',
-						smooth: true,
-						itemStyle: {
-							color: '#FF1C1C',
-						},
-						data: wyData
-					},
-					{
-						name: '头条',
-						type: 'line',
-						smooth: true,
-						itemStyle: {
-							color: '#D96729',
-						},
-						data: ttData
-					},
-					{
-						name: '腾讯',
-						type: 'line',
-						smooth: true,
-						itemStyle: {
-							color: '#BE55E1',
-						},
-						data: txData
-					},
-					{
-						name: '新浪',
-						type: 'line',
-						smooth: true,
-						itemStyle: {
-							color: '#159FFF',
-						},
-						data: xlData
-					},
-					{
-						name: '搜狐',
-						type: 'line',
-						smooth: true,
-						itemStyle: {
-							color: '#36B77F',
-						},
-						data: shData
-					},
-					{
-						name: '凤凰网',
-						type: 'line',
-						smooth: true,
-						itemStyle: {
-							color: '#FAAD14',
-						},
-						data: fhwData
-					},
-					{
-						name: '警戒线',
-						type: 'line',
-						smooth: true,
-						itemStyle: {
-							normal: {
-								lineStyle: {
-									type: 'dotted' //'dotted'虚线 'solid'实线
-								}
-							}
-						},
-						data: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
-					}
+						//	that.surveyList = res.data
+						that.linkSum.normalCount = res.data.normalCount;
+						that.linkSum.negetiveCount = res.data.negetiveCount;
+						that.linkSum.noCommentCount = res.data.noCommentCount;
 
-					]
+						var curTime = new Date();
+						var hour = curTime.getHours();//得到小时数
+						var minute = curTime.getMinutes();//得到分钟数
+						var second = curTime.getSeconds();//得到秒数
+						var last2Hour = new Date(curTime.getTime()- 2*60*60*1000);
 
 
-				};
-				this.echarts.setOption(option)
+						that.pageData[0].showDate = last2Hour.getHours() + ":" + last2Hour.getMinutes() + ":" 
+						+ last2Hour.getSeconds() + "-" +  curTime.getHours() + ":" + curTime.getMinutes() + ":" 
+						+ curTime.getSeconds();
+						that.pageData[0].normalCount = res.data.last2HourNormalCount;
+						that.pageData[0].negetiveCount = res.data.last2HourNegetiveCount;
+						that.pageData[0].noCommentCount = res.data.last2HourNoCommentCount;
+
+						for(var i=0;i<that.pageData[0].normalCount;i++)
+						{
+							that.pageData[0].comment.push({isNormal:true});
+						}
+
+						for(var i=0;i<that.pageData[0].negetiveCount;i++)
+						{
+						    var index =	Math.floor(Math.random() * (that.pageData[0].comment.length - 0)) + 0;
+							that.pageData[0].comment.splice(index,0,{isNegetive:true});
+						}
+						
+						for(var i=0;i<that.pageData[0].noCommentCount;i++)
+						{
+							var index =	Math.floor(Math.random() * (that.pageData[0].comment.length - 0)) + 0;
+							that.pageData[0].comment.splice(index,0,{isNoComment:true});
+						}
+
+						var	last5Hour = new Date(curTime.getTime()- 5*60*60*1000);
+						that.pageData[1].showDate =  last5Hour.getHours() + ":" + last5Hour.getMinutes() + ":" 
+						+ last5Hour.getSeconds() + "-" +  curTime.getHours() + ":" + curTime.getMinutes() + ":" 
+						+ curTime.getSeconds();
+						that.pageData[1].normalCount = res.data.last5HourNormalCount;
+						that.pageData[1].negetiveCount = res.data.last5HourNegetiveCount;
+						that.pageData[1].noCommentCount = res.data.last5HourNoCommentCount;
+						for(var i=0;i<that.pageData[1].normalCount;i++)
+						{
+							that.pageData[1].comment.push({isNormal:true});
+						}
+
+						for(var i=0;i<that.pageData[1].negetiveCount;i++)
+						{
+						    var index =	Math.floor(Math.random() * (that.pageData[1].comment.length - 0)) + 0;
+							that.pageData[1].comment.splice(index,0,{isNegetive:true});
+						}
+						
+						for(var i=0;i<that.pageData[1].noCommentCount;i++)
+						{
+							var index =	Math.floor(Math.random() * (that.pageData[1].comment.length - 0)) + 0;
+							that.pageData[1].comment.splice(index,0,{isNoComment:true});
+						}
+
+						var	last12Hour = new Date(curTime.getTime()- 12*60*60*1000);
+						that.pageData[2].showDate =  last12Hour.getHours() + ":" + last12Hour.getMinutes() + ":" 
+						+ last12Hour.getSeconds() + "-" +  curTime.getHours() + ":" + curTime.getMinutes() + ":" 
+						+ curTime.getSeconds();
+						that.pageData[2].normalCount = res.data.last12HourNormalCount;
+						that.pageData[2].negetiveCount = res.data.last12HourNegetiveCount;
+						that.pageData[2].noCommentCount = res.data.last12HourNoCommentCount;
+						for(var i=0;i<that.pageData[2].normalCount;i++)
+						{
+							that.pageData[2].comment.push({isNormal:true});
+						}
+
+						for(var i=0;i<that.pageData[2].negetiveCount;i++)
+						{
+						    var index =	Math.floor(Math.random() * (that.pageData[2].comment.length - 0)) + 0;
+							that.pageData[2].comment.splice(index,0,{isNegetive:true});
+						}
+						
+						for(var i=0;i<that.pageData[2].noCommentCount;i++)
+						{
+							var index =	Math.floor(Math.random() * (that.pageData[2].comment.length - 0)) + 0;
+							that.pageData[2].comment.splice(index,0,{isNoComment:true});
+						}
+
+
+
+						var	last24Hour = new Date(curTime.getTime()- 24*60*60*1000);
+						that.pageData[3].showDate =  last24Hour.getHours() + ":" + last24Hour.getMinutes() + ":" 
+						+ last24Hour.getSeconds() + "-" +  curTime.getHours() + ":" + curTime.getMinutes() + ":" 
+						+ curTime.getSeconds();
+						that.pageData[3].normalCount = res.data.last24HourNormalCount;
+						that.pageData[3].negetiveCount = res.data.last24HourNegetiveCount;
+						that.pageData[3].noCommentCount = res.data.last24HourNoCommentCount;
+						for(var i=0;i<that.pageData[3].normalCount;i++)
+						{
+							that.pageData[3].comment.push({isNormal:true});
+						}
+
+						for(var i=0;i<that.pageData[3].negetiveCount;i++)
+						{
+						    var index =	Math.floor(Math.random() * (that.pageData[3].comment.length - 0)) + 0;
+							that.pageData[3].comment.splice(index,0,{isNegetive:true});
+						}
+						
+						for(var i=0;i<that.pageData[3].noCommentCount;i++)
+						{
+							var index =	Math.floor(Math.random() * (that.pageData[3].comment.length - 0)) + 0;
+							that.pageData[3].comment.splice(index,0,{isNoComment:true});
+						}
+
+
+					} else {
+						alert(res.message)
+					}
+				})
 			}
 		}
 

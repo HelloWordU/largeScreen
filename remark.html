@@ -45,7 +45,7 @@
 						<div class="title_pub">
 							<span>近期热点文章</span>
 						</div>
-						<div class="swiper mySwiper">
+						<div class="swiper mySwiper  swiper-initialized swiper-vertical swiper-pointer-events swiper-backface-hidden">
 							<div class="swiper-wrapper">
 								<div class="swiper-slide hot_list" v-for="(item,index) in hotList" :key="index">
 									<img v-if="index<=2" :src="'img/remark/pic'+index+'.png'">
