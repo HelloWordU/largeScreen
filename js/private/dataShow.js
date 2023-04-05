@@ -93,7 +93,7 @@ window.onload = function () {
 						type: 'category',
 						boundaryGap: false,
 						data: this.timeData,
-            axisTick: { alignWithLabel: true },
+						axisTick: { alignWithLabel: true },
 						axisLine: { //x轴线的颜色以及宽度
 							show: true,
 							lineStyle: {
@@ -109,7 +109,7 @@ window.onload = function () {
 								fontWeight: "bold"
 							}
 						},
-            boundaryGap: true, 
+						boundaryGap: true,
 					},
 					yAxis: {
 						type: 'value',
@@ -122,14 +122,14 @@ window.onload = function () {
 								type: "solid"
 							}
 						},
-            splitLine:{
-              show: true,
-              lineStyle: {
-              	color: "#044B98",
-              	width: 1,
-              	type: "solid"
-              }
-            },
+						splitLine: {
+							show: true,
+							lineStyle: {
+								color: "#044B98",
+								width: 1,
+								type: "solid"
+							}
+						},
 						axisLabel: {
 							textStyle: {
 								color: "#ffffff",
@@ -148,7 +148,7 @@ window.onload = function () {
 						data: zsData
 					},
 					{
-						name: '竞品',
+						name: '精品',
 						type: 'line',
 						smooth: true,
 						itemStyle: {
@@ -188,8 +188,7 @@ window.onload = function () {
 				getMessage(listUrl).then(function (res) {
 					if (res.code == 200) {
 						res.data.forEach(item => {
-							if(item.type == 1)
-							{
+							if (item.type == 1) {
 								$('title').text(item.name);
 								that.pageTitle = item.name;
 							}
@@ -236,14 +235,12 @@ window.onload = function () {
 								"labelType": 1,
 								"id": item.id,
 								"title": "(" + item.categoryName + ")" + item.plantformName + "(" + item.categoryName + ")",
-								"plantformName": item.plantformName
+								"plantformName": item.plantformName,
+								"plantfromrId": item.plantformId
 							})
 						})
-						that.FnSearchList(that.detailList[0].id)
-						that.searchText = that.detailList[0].plantformName
 						that.$nextTick(function () {
 							that.FnSwiper()
-							//that.FnSetTime()
 						})
 					} else {
 						alert(res.message)
@@ -281,30 +278,33 @@ window.onload = function () {
 				})
 			},
 			FnSwiper: function () {
-				var that = this
 				this.mySwiper = null
+				var that = this
 				this.mySwiper = new Swiper(".mySwiper", {
+					on: {
+						slideChangeTransitionEnd: function () {
+							var num = this.realIndex
+							that.FnSearchList(that.detailList[num].plantfromrId)
+							that.searchText = that.detailList[num].plantformName
+						},
+						transitionEnd: function () {
+							var num = this.activeIndex
+							$('.detail_list').eq(num).addClass('selected').siblings().removeClass('selected')
+						}
+					},
 					direction: "vertical",
 					autoplay: true,
 					speed: 20000,
 					loop: true, //数据需要循环就放开
 					observer: true, //修改swiper自己或子元素时，自动初始化swiper
 					observeParents: true, //修改swiper的父元素时，自动初始化swiper
-					slidesPerView:5,
-					on: {
-						slideChangeTransitionEnd: function(){
-						 //alert(this.activeIndex);//切换结束时，告诉我现在是第几个slide
-						 that.searchText =// $(".mySwiper .swiper-slide-active").find("[tag=plantformName]").html();
-						 //$(".mySwiper .detail_list").eq(this.activeIndex).find("[tag=plantformName]").html();	
-						  $(".mySwiper .detail_list").eq(this.realIndex).find("[tag=plantformName]").html();
-						},
-					  },
+					slidesPerView: 5
 				})
 			},
 			FnSearchSwiper: function () {
-				if(this.searchSwiper){
-				  this.searchSwiper.destroy(false)
-				  this.searchSwiper = null
+				if (this.searchSwiper) {
+					this.searchSwiper.destroy(false)
+					this.searchSwiper = null
 				}
 				this.searchSwiper = new Swiper(".searchSwiper", {
 					direction: "vertical",

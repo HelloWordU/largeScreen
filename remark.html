@@ -60,7 +60,7 @@
 						<div class="title_pub">
 							<span>近期行业热词</span>
 						</div>
-						<div class="swiper wordSwiper">
+						<div class="swiper wordSwiper swiper-vertical">
 							<div class="swiper-wrapper">
 								<div class="swiper-slide word_list" v-for="(item,index) in wordList" :key="index">
 									<img v-if="index<=2" :src="'img/remark/pic'+index+'.png'">
@@ -76,7 +76,7 @@
 					<div class="title_pub" style="margin-bottom: 15px;">
 						<span>本周亮点文章</span>
 					</div>
-					<div class="swiper articleSwiper">
+					<div class="swiper articleSwiper swiper-vertical">
 						<div class="swiper-wrapper article_list">
 							<div class="swiper-slide word_list" v-for="(item,index) in articleList" :key="index">
 								<img src="img/remark/-huangguan.png">
@@ -101,11 +101,11 @@
 					</div>
 				</div>
 			</div>
-			<div class="bottom_pub">
+			<!-- <div class="bottom_pub">
 			  <p>Copyright©2016-2022 瑞智新传ruizhixinzhuan.com 版权所有</p>
 			  <p>沪ICP备16053114号-2 ICP证：沪B2-20180032 沪公网安备31011502400137号</p>
 			  <img src="img/public/border.png" >
-			</div>
+			</div> -->
 		</div>
 	</body>
 	<script src="js/public/jquery.min.js" type="text/javascript" charset="utf-8"></script>

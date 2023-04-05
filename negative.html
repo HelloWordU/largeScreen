@@ -45,7 +45,7 @@
 						</div>
 					</div>
 					<div class="headline_con traffic_con">
-						<div v-for="(item,index) in surveyList" :key="index">
+						<div v-for="(item,index) in headlineList" :key="index">
 							<img v-if="item.value == 1" src="img/negative/green.png" >
 							<img v-if="item.value == 0" src="img/negative/yellow.png" >
 							<img v-if="item.value == -1" src="img/negative/red.png" >
@@ -71,11 +71,11 @@
 					
 				</div>
 			</div>
-			<div class="bottom_pub">
+			<!-- <div class="bottom_pub">
 			  <p>Copyright©2016-2022 瑞智新传ruizhixinzhuan.com 版权所有</p>
 			  <p>沪ICP备16053114号-2 ICP证：沪B2-20180032 沪公网安备31011502400137号</p>
 			  <img src="img/public/border.png" >
-			</div>
+			</div> -->
 		</div>
 	</body>
 	<script src="js/public/jquery.min.js" type="text/javascript" charset="utf-8"></script>

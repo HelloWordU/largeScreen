@@ -13,7 +13,7 @@ window.onload = function () {
 			saveUrl: "/categoryScreenConfig/save",
 			/* 保存大屏配置路径 */
 			queryCategoryUrl: "/category/get",
-			categoryUrl:"/category/getById",
+			categoryUrl: "/category/getById",
 			num: 0,
 			categoryName: "",
 		},
@@ -68,6 +68,14 @@ window.onload = function () {
 				getMessage(listUrl).then(function (res) {
 					if (res.code == 200) {
 						that.picList = [];
+						if (res.data.length == 0) {
+							res.data = [
+								{ categoryId: getQuery("cid"), name: "核心入口屏", type: 1, },
+								{ categoryId: getQuery("cid"), name: "全网舆情屏", type: 2 },
+								{ categoryId: getQuery("cid"), name: "整合分发屏", type: 3 },
+								{ categoryId: getQuery("cid"), name: "评论区维护红绿灯预警", type: 4 }
+							]
+						}
 						res.data.forEach(item => {
 							var linkUrlData = "./datashow.html?cid=" + getQuery("cid"); //核心数据daping 
 							if (item.type == 2) {
@@ -90,6 +98,7 @@ window.onload = function () {
 								categoryId: item.categoryId
 							});
 						});
+						
 					} else {
 						alert(res.message)
 					}

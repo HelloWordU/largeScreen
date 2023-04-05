@@ -93,22 +93,23 @@ window.onload = function () {
 						that.pageData[0].negetiveCount = res.data.last2HourNegetiveCount;
 						that.pageData[0].noCommentCount = res.data.last2HourNoCommentCount;
 
-						for(var i=0;i<that.pageData[0].normalCount;i++)
-						{
-							that.pageData[0].comment.push({isNormal:true});
-						}
+                        that.pageData[0].comment =  res.data.last2HourData;
+						// for(var i=0;i<that.pageData[0].normalCount;i++)
+						// {
+						// 	that.pageData[0].comment.push({isNormal:true});
+						// }
 
-						for(var i=0;i<that.pageData[0].negetiveCount;i++)
-						{
-						    var index =	Math.floor(Math.random() * (that.pageData[0].comment.length - 0)) + 0;
-							that.pageData[0].comment.splice(index,0,{isNegetive:true});
-						}
+						// for(var i=0;i<that.pageData[0].negetiveCount;i++)
+						// {
+						//     var index =	Math.floor(Math.random() * (that.pageData[0].comment.length - 0)) + 0;
+						// 	that.pageData[0].comment.splice(index,0,{isNegetive:true});
+						// }
 						
-						for(var i=0;i<that.pageData[0].noCommentCount;i++)
-						{
-							var index =	Math.floor(Math.random() * (that.pageData[0].comment.length - 0)) + 0;
-							that.pageData[0].comment.splice(index,0,{isNoComment:true});
-						}
+						// for(var i=0;i<that.pageData[0].noCommentCount;i++)
+						// {
+						// 	var index =	Math.floor(Math.random() * (that.pageData[0].comment.length - 0)) + 0;
+						// 	that.pageData[0].comment.splice(index,0,{isNoComment:true});
+						// }
 
 						var	last5Hour = new Date(curTime.getTime()- 5*60*60*1000);
 						that.pageData[1].showDate =  last5Hour.getHours() + ":" + last5Hour.getMinutes() + ":" 
@@ -117,22 +118,24 @@ window.onload = function () {
 						that.pageData[1].normalCount = res.data.last5HourNormalCount;
 						that.pageData[1].negetiveCount = res.data.last5HourNegetiveCount;
 						that.pageData[1].noCommentCount = res.data.last5HourNoCommentCount;
-						for(var i=0;i<that.pageData[1].normalCount;i++)
-						{
-							that.pageData[1].comment.push({isNormal:true});
-						}
 
-						for(var i=0;i<that.pageData[1].negetiveCount;i++)
-						{
-						    var index =	Math.floor(Math.random() * (that.pageData[1].comment.length - 0)) + 0;
-							that.pageData[1].comment.splice(index,0,{isNegetive:true});
-						}
+						that.pageData[1].comment =  res.data.last5HourData;
+						// for(var i=0;i<that.pageData[1].normalCount;i++)
+						// {
+						// 	that.pageData[1].comment.push({isNormal:true});
+						// }
+
+						// for(var i=0;i<that.pageData[1].negetiveCount;i++)
+						// {
+						//     var index =	Math.floor(Math.random() * (that.pageData[1].comment.length - 0)) + 0;
+						// 	that.pageData[1].comment.splice(index,0,{isNegetive:true});
+						// }
 						
-						for(var i=0;i<that.pageData[1].noCommentCount;i++)
-						{
-							var index =	Math.floor(Math.random() * (that.pageData[1].comment.length - 0)) + 0;
-							that.pageData[1].comment.splice(index,0,{isNoComment:true});
-						}
+						// for(var i=0;i<that.pageData[1].noCommentCount;i++)
+						// {
+						// 	var index =	Math.floor(Math.random() * (that.pageData[1].comment.length - 0)) + 0;
+						// 	that.pageData[1].comment.splice(index,0,{isNoComment:true});
+						// }
 
 						var	last12Hour = new Date(curTime.getTime()- 12*60*60*1000);
 						that.pageData[2].showDate =  last12Hour.getHours() + ":" + last12Hour.getMinutes() + ":" 
@@ -141,22 +144,24 @@ window.onload = function () {
 						that.pageData[2].normalCount = res.data.last12HourNormalCount;
 						that.pageData[2].negetiveCount = res.data.last12HourNegetiveCount;
 						that.pageData[2].noCommentCount = res.data.last12HourNoCommentCount;
-						for(var i=0;i<that.pageData[2].normalCount;i++)
-						{
-							that.pageData[2].comment.push({isNormal:true});
-						}
 
-						for(var i=0;i<that.pageData[2].negetiveCount;i++)
-						{
-						    var index =	Math.floor(Math.random() * (that.pageData[2].comment.length - 0)) + 0;
-							that.pageData[2].comment.splice(index,0,{isNegetive:true});
-						}
+						that.pageData[2].comment =  res.data.last12HourData;
+						// for(var i=0;i<that.pageData[2].normalCount;i++)
+						// {
+						// 	that.pageData[2].comment.push({isNormal:true});
+						// }
+
+						// for(var i=0;i<that.pageData[2].negetiveCount;i++)
+						// {
+						//     var index =	Math.floor(Math.random() * (that.pageData[2].comment.length - 0)) + 0;
+						// 	that.pageData[2].comment.splice(index,0,{isNegetive:true});
+						// }
 						
-						for(var i=0;i<that.pageData[2].noCommentCount;i++)
-						{
-							var index =	Math.floor(Math.random() * (that.pageData[2].comment.length - 0)) + 0;
-							that.pageData[2].comment.splice(index,0,{isNoComment:true});
-						}
+						// for(var i=0;i<that.pageData[2].noCommentCount;i++)
+						// {
+						// 	var index =	Math.floor(Math.random() * (that.pageData[2].comment.length - 0)) + 0;
+						// 	that.pageData[2].comment.splice(index,0,{isNoComment:true});
+						// }
 
 
 
@@ -167,22 +172,23 @@ window.onload = function () {
 						that.pageData[3].normalCount = res.data.last24HourNormalCount;
 						that.pageData[3].negetiveCount = res.data.last24HourNegetiveCount;
 						that.pageData[3].noCommentCount = res.data.last24HourNoCommentCount;
-						for(var i=0;i<that.pageData[3].normalCount;i++)
-						{
-							that.pageData[3].comment.push({isNormal:true});
-						}
+						that.pageData[3].comment =  res.data.last24HourData;
+						// for(var i=0;i<that.pageData[3].normalCount;i++)
+						// {
+						// 	that.pageData[3].comment.push({isNormal:true});
+						// }
 
-						for(var i=0;i<that.pageData[3].negetiveCount;i++)
-						{
-						    var index =	Math.floor(Math.random() * (that.pageData[3].comment.length - 0)) + 0;
-							that.pageData[3].comment.splice(index,0,{isNegetive:true});
-						}
+						// for(var i=0;i<that.pageData[3].negetiveCount;i++)
+						// {
+						//     var index =	Math.floor(Math.random() * (that.pageData[3].comment.length - 0)) + 0;
+						// 	that.pageData[3].comment.splice(index,0,{isNegetive:true});
+						// }
 						
-						for(var i=0;i<that.pageData[3].noCommentCount;i++)
-						{
-							var index =	Math.floor(Math.random() * (that.pageData[3].comment.length - 0)) + 0;
-							that.pageData[3].comment.splice(index,0,{isNoComment:true});
-						}
+						// for(var i=0;i<that.pageData[3].noCommentCount;i++)
+						// {
+						// 	var index =	Math.floor(Math.random() * (that.pageData[3].comment.length - 0)) + 0;
+						// 	that.pageData[3].comment.splice(index,0,{isNoComment:true});
+						// }
 
 
 					} else {
